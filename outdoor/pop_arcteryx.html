@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POP × Arc’teryx — An outdoor acquisition brief</title>
+<meta name="description" content="POP for Arc’teryx. Translating performance, purpose, and the outdoors into digital experiences worthy of the moment." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Refined palette — slightly warmer/deeper than first pass */
+    --charcoal:        #1a1d22;
+    --charcoal-2:      #23272d;
+    --evergreen:       #1a3530;
+    --evergreen-deep:  #0f2622;
+    --mint-light:      #cdd6c8;
+    --cream:           #f1ebde;
+    --bone:            #e8e1d3;
+    --bone-soft:       rgba(232,225,211,0.78);
+
+    /* Arc'teryx-feeling accent: deeper, more alpine red than Nike */
+    --accent:          #b22020;
+    --accent-deep:     #8a1a18;
+
+    --line:            rgba(255,255,255,0.16);
+    --line-soft:       rgba(255,255,255,0.08);
+    --line-dark:       rgba(26,29,32,0.18);
+
+    --font:    "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
+    --container: 1380px;
+    --pad-x: clamp(20px, 4vw, 64px);
+    --ease: cubic-bezier(.2, .7, .2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--cream);
+    color: var(--charcoal);
+    line-height: 1.55;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "ss02";
+  }
+  img, video, svg { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  ul { list-style: none; }
+
+  .theme-charcoal       { background: var(--charcoal);    color: var(--cream); --line-current: var(--line); }
+  .theme-evergreen      { background: var(--evergreen);   color: var(--cream); --line-current: var(--line); }
+  .theme-evergreen-deep { background: var(--evergreen-deep); color: var(--cream); --line-current: var(--line); }
+  .theme-mint-light     { background: var(--mint-light);  color: var(--charcoal); --line-current: var(--line-dark); }
+  .theme-cream          { background: var(--cream);       color: var(--charcoal); --line-current: var(--line-dark); }
+
+  /* TYPOGRAPHY — all sans, italic for emphasis (lighter weight + color shift) */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+  h1 i, h2 i, h3 i, h4 i, h5 i {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--bone);
+  }
+  /* On light backgrounds, italic emphasis stays charcoal but slightly lighter weight */
+  .theme-mint-light h1 i, .theme-mint-light h2 i, .theme-mint-light h3 i, .theme-mint-light h4 i,
+  .theme-cream h1 i, .theme-cream h2 i, .theme-cream h3 i, .theme-cream h4 i {
+    color: rgba(26,29,34,0.65);
+    font-weight: 300;
+  }
+
+  .h-display { font-size: clamp(48px, 8vw, 124px); line-height: 0.96; letter-spacing: -0.04em; font-weight: 500; }
+  .h-1 { font-size: clamp(40px, 5.6vw, 84px); line-height: 1.0; letter-spacing: -0.035em; font-weight: 500; }
+  .h-2 { font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; }
+  .h-3 { font-size: clamp(24px, 2.6vw, 36px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+
+  .label-small {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .label-small::before {
+    content: "";
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: currentColor;
+    vertical-align: middle;
+    margin-right: 12px;
+    transform: translateY(-2px);
+  }
+
+  p { font-size: clamp(16px, 1.05vw, 18px); line-height: 1.6; }
+  .lede { font-size: clamp(18px, 1.3vw, 21px); line-height: 1.55; font-weight: 400; }
+
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding-inline: var(--pad-x);
+  }
+  .blade {
+    padding-block: clamp(80px, 12vw, 200px);
+    position: relative;
+  }
+
+  /* HEADER */
+  .app-header-spacer { height: 88px; }
+  .app-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    background: var(--charcoal);
+    color: var(--cream);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: transform .35s var(--ease);
+  }
+  .app-header.is-hidden { transform: translateY(-100%); }
+  .app-header__row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    height: 88px;
+    gap: 24px;
+  }
+  .pop-logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pop-logo {
+    display: inline-block;
+    height: 28px;
+    width: auto;
+  }
+  .pop-logo svg {
+    height: 100%;
+    width: auto;
+    display: block;
+  }
+  .arc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 14px 7px 10px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    transition: background .3s var(--ease);
+  }
+  .arc-pill::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(255,255,255,0.8);
+    animation: pulse 2.4s var(--ease) infinite;
+  }
+  .arc-pill:hover { background: var(--accent-deep); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+    50%      { box-shadow: 0 0 0 6px rgba(255,255,255,0); }
+  }
+
+  .app-header__nav {
+    display: flex;
+    gap: 38px;
+    justify-self: center;
+  }
+  .app-header__nav a {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: rgba(241,235,222,0.78);
+    transition: color .25s var(--ease);
+    position: relative;
+    padding-block: 6px;
+  }
+  .app-header__nav a::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: var(--cream);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .35s var(--ease);
+  }
+  .app-header__nav a:hover { color: var(--cream); }
+  .app-header__nav a:hover::after { transform: scaleX(1); }
+  .app-header__right { justify-self: end; display: flex; align-items: center; gap: 16px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+    background: transparent;
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--cream); color: var(--charcoal); }
+  .theme-cream .btn:hover, .theme-mint-light .btn:hover { background: var(--charcoal); color: var(--cream); }
+  .btn-small { padding: 10px 18px; font-size: 13px; }
+  .btn-solid { background: var(--cream); color: var(--charcoal); border-color: var(--cream); }
+  .btn-solid:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 88px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding-bottom: clamp(60px, 9vw, 120px);
+    padding-top: clamp(80px, 10vw, 140px);
+  }
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hero__media video {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 30%, transparent 0%, rgba(0,0,0,0.35) 70%),
+      linear-gradient(to bottom, rgba(0,0,0,0.4), transparent 30%, transparent 60%, rgba(26,29,34,0.85));
+    pointer-events: none;
+  }
+  .hero__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* (arc-mark replaced by real Arc'teryx logo watermark) */
+
+  /* Arc'teryx logo watermark in hero */
+  .hero__arcteryx-logo {
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(280px, 32vw, 520px);
+    opacity: 0.12;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero__arcteryx-logo path { fill: var(--cream); }
+  .hero__arcteryx-logo .arc-bg { display: none; }
+
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  .hero__brief {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .9s var(--ease) .2s forwards;
+  }
+  .hero__brief-tag {
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+    line-height: 1;
+    font-weight: 500;
+  }
+  .hero__brief-line {
+    color: var(--bone);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .hero__headline {
+    color: var(--cream);
+    max-width: 19ch;
+    opacity: 0;
+    animation: fadeUp 1.1s var(--ease) .35s forwards;
+  }
+  .hero__headline .arc-word {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 300;
+    display: inline-block;
+  }
+  .hero__sub {
+    margin-top: 36px;
+    max-width: 56ch;
+    color: rgba(241,235,222,0.85);
+    opacity: 0;
+    animation: fadeUp 1s var(--ease) .55s forwards;
+  }
+  .hero__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-top: clamp(48px, 6vw, 80px);
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s var(--ease) .75s forwards;
+  }
+  .hero__meta-line {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(241,235,222,0.55);
+    line-height: 1.6;
+  }
+  .hero__scroll {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(241,235,222,0.7);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero__scroll .line {
+    width: 36px; height: 1px; background: currentColor;
+    animation: scrollLine 2s var(--ease) infinite;
+    transform-origin: left;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleX(.4); }
+    50%      { transform: scaleX(1); }
+  }
+
+  /* INTRO */
+  .intro__grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+  }
+  .intro__copy h2 { color: var(--cream); }
+  .intro__copy h2 i { color: var(--bone); font-weight: 300; }
+  .intro__copy p {
+    margin-top: 32px;
+    max-width: 56ch;
+    color: rgba(241,235,222,0.82);
+    font-size: clamp(17px, 1.2vw, 19px);
+  }
+  .arc-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-style: normal;
+    font-size: 0.5em;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    transform: translateY(-0.3em);
+    margin-right: 6px;
+  }
+
+  @media (max-width: 900px) {
+    .intro__grid { grid-template-columns: 1fr; }
+  }
+
+  /* PILLARS */
+  .pillars__head { margin-bottom: clamp(48px, 6vw, 80px); max-width: 26ch; }
+  .pillars__head h2 i { font-style: italic; font-weight: 300; }
+
+  .pillar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 1.4fr;
+    gap: clamp(24px, 4vw, 64px);
+    padding-block: clamp(40px, 5vw, 64px);
+    border-top: 1px solid var(--line-current);
+    align-items: start;
+    transition: padding-left .5s var(--ease);
+  }
+  .pillar-row:last-child { border-bottom: 1px solid var(--line-current); }
+  .pillar-row:hover { padding-left: 16px; }
+  .pillar-num {
+    font-size: clamp(34px, 3.4vw, 52px);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--cream);
+    font-variant-numeric: tabular-nums;
+  }
+  .pillar-num .dot {
+    color: var(--accent);
+    margin-left: 2px;
+  }
+  .pillar-title {
+    font-size: clamp(22px, 2.2vw, 32px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+  .pillar-title i { font-style: italic; font-weight: 300; color: var(--bone); }
+  .pillar-body p {
+    font-size: clamp(16px, 1.1vw, 17px);
+    max-width: 52ch;
+    color: rgba(241,235,222,0.82);
+  }
+  .pillar-body p + p { margin-top: 18px; }
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .pillar-tag {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 6px 12px;
+    border: 1px solid var(--line-current);
+    border-radius: 999px;
+    line-height: 1;
+    color: rgba(241,235,222,0.8);
+  }
+
+  @media (max-width: 900px) {
+    .pillar-row { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* TRANSLATION LEDGER */
+  .translate {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+  }
+  .translate__head h2 i { font-style: italic; font-weight: 300; color: var(--bone); }
+  .translate__head p {
+    margin-top: 28px;
+    color: rgba(241,235,222,0.78);
+    max-width: 36ch;
+  }
+  .translate__arc-mark {
+    margin-top: 40px;
+    font-style: italic;
+    font-weight: 200;
+    font-size: clamp(40px, 4.5vw, 64px);
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .translate__arc-mark::after {
+    content: "→ this is for you.";
+    display: block;
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(241,235,222,0.55);
+    margin-top: 14px;
+    font-weight: 500;
+  }
+
+  .translate-ledger {
+    border-top: 1px solid var(--line-current);
+  }
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 56px 1fr auto 1.4fr;
+    gap: clamp(16px, 2.5vw, 32px);
+    align-items: baseline;
+    padding-block: clamp(20px, 2.4vw, 28px);
+    border-bottom: 1px solid var(--line-current);
+    transition: padding-left .45s var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .ledger-row::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0;
+    background: var(--accent);
+    opacity: 0.07;
+    transition: width .55s var(--ease);
+    z-index: 0;
+  }
+  .ledger-row > * { position: relative; z-index: 1; }
+  .ledger-row:hover { padding-left: 16px; }
+  .ledger-row:hover::before { width: 100%; }
+  .ledger-num {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    opacity: 0.55;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+  .ledger-from {
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  .ledger-arrow {
+    font-size: clamp(18px, 1.8vw, 24px);
+    opacity: 0.4;
+    line-height: 1;
+    font-weight: 300;
+  }
+  .ledger-to {
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    font-style: italic;
+    color: var(--bone);
+  }
+
+  @media (max-width: 900px) {
+    .translate { grid-template-columns: 1fr; }
+    .ledger-row { grid-template-columns: 40px 1fr auto 1fr; gap: 12px; }
+  }
+  @media (max-width: 540px) {
+    .ledger-row { grid-template-columns: 36px 1fr; }
+    .ledger-arrow { display: none; }
+    .ledger-to { grid-column: 2; padding-top: 4px; opacity: 0.85; }
+  }
+
+  /* DIFFERENTIATORS */
+  .diff__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+  }
+  .diff__head h2 i { font-style: italic; font-weight: 300; color: rgba(26,29,34,0.6); }
+  .diff__head p { margin-top: 28px; max-width: 38ch; opacity: 0.82; }
+
+  .underline-list-big { border-top: 1px solid var(--line-current); }
+  .underline-list-big li {
+    border-bottom: 1px solid var(--line-current);
+    padding-block: clamp(20px, 2.5vw, 32px);
+    font-size: clamp(28px, 3.2vw, 48px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    position: relative;
+    cursor: default;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    transition: padding-left .45s var(--ease);
+  }
+  .underline-list-big li i { font-style: italic; font-weight: 300; color: rgba(26,29,34,0.55); }
+  .underline-list-big li::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 -1px 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .55s var(--ease);
+  }
+  .underline-list-big li:hover { padding-left: 18px; }
+  .underline-list-big li:hover::before { transform: scaleX(1); }
+  .underline-list-big .num {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    opacity: 0.5;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 900px) {
+    .diff__grid { grid-template-columns: 1fr; }
+  }
+
+  /* arrow-link */
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 4px;
+    line-height: 1;
+  }
+  .arrow-link .arr { transition: transform .35s var(--ease); display: inline-block; }
+  .arrow-link:hover .arr { transform: translateX(6px); }
+
+  /* CTA BLADE */
+  .cta-blade { text-align: left; position: relative; overflow: hidden; }
+  .cta-blade__inner {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(40px, 5vw, 80px);
+    align-items: end;
+  }
+  .cta-blade h2 {
+    color: var(--cream);
+    font-size: clamp(44px, 6.4vw, 108px);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+  }
+  .cta-blade h2 i { font-style: italic; font-weight: 300; color: var(--bone); }
+  .cta-blade h2 .arc-emph {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+  .cta-blade__action { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+  .cta-blade__lede { color: rgba(241,235,222,0.85); max-width: 32ch; font-size: clamp(17px, 1.2vw, 19px); }
+  .cta-blade .btn-solid { padding: 18px 32px; font-size: 14px; }
+  .cta-blade__topo { position: absolute; inset: 0; opacity: 0.18; pointer-events: none; }
+
+  @media (max-width: 900px) {
+    .cta-blade__inner { grid-template-columns: 1fr; }
+  }
+
+  /* FOOTER */
+  .app-footer {
+    padding-block: clamp(60px, 8vw, 120px) 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .app-footer__topo { position: absolute; inset: 0; opacity: 0.08; pointer-events: none; }
+  .footer__eyebrow { color: var(--bone); margin-bottom: 28px; position: relative; }
+  .footer__main h3 {
+    font-size: clamp(40px, 5vw, 76px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    color: var(--cream);
+    max-width: 14ch;
+    position: relative;
+    line-height: 1;
+  }
+  .footer__main h3 i { font-style: italic; font-weight: 300; color: var(--accent); }
+  .footer__main h4 {
+    margin-top: 32px;
+    font-size: clamp(18px, 1.4vw, 22px);
+    line-height: 1.4;
+    color: rgba(241,235,222,0.82);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .footer__main h4 a {
+    color: var(--cream);
+    border-bottom: 1px solid rgba(241,235,222,0.4);
+    padding-bottom: 2px;
+    transition: border-color .3s var(--ease);
+  }
+  .footer__main h4 a:hover { border-color: var(--cream); }
+
+  .footer__bottom {
+    margin-top: clamp(60px, 8vw, 120px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .footer__nav {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .footer__nav .arrow-link { font-size: 13px; }
+  .social-links { display: flex; gap: 16px; align-items: center; margin-right: 24px; }
+  .social-link {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .social-link:hover { background: var(--cream); color: var(--charcoal); border-color: var(--cream); }
+  .footer__copyright {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: rgba(241,235,222,0.55);
+    text-align: right;
+  }
+  .footer__copyright a { border-bottom: 1px solid rgba(241,235,222,0.25); padding-bottom: 1px; }
+
+  @media (max-width: 700px) {
+    .footer__bottom { grid-template-columns: 1fr; }
+    .footer__copyright { text-align: left; }
+  }
+
+  /* SCROLL ANIMATIONS */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity .9s var(--ease), transform .9s var(--ease);
+    will-change: opacity, transform;
+  }
+  .scroll-animate.is-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .scroll-animate[data-delay="1"].is-in { transition-delay: .08s; }
+  .scroll-animate[data-delay="2"].is-in { transition-delay: .16s; }
+
+  /* MARQUEE */
+  .marquee {
+    overflow: hidden;
+    border-block: 1px solid var(--line-current);
+    padding-block: 28px;
+    white-space: nowrap;
+  }
+  .marquee__track {
+    display: inline-flex;
+    gap: 64px;
+    animation: marquee 50s linear infinite;
+    will-change: transform;
+  }
+  .marquee__item {
+    font-size: clamp(26px, 2.8vw, 40px);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 64px;
+  }
+  .marquee__item i { font-style: italic; font-weight: 300; opacity: 0.65; color: var(--bone); }
+  .marquee__arc {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+  .marquee__dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* MTB MANIFESTO */
+  .manifesto {
+    position: relative;
+    overflow: hidden;
+  }
+  .manifesto__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+  }
+  .manifesto__quote {
+    font-size: clamp(36px, 4.8vw, 72px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    color: var(--cream);
+  }
+  .manifesto__quote i {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--bone);
+  }
+  .manifesto__quote .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .manifesto__sidebar {
+    border-left: 1px solid var(--line);
+    padding-left: clamp(24px, 3vw, 48px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4vw, 56px);
+  }
+  .manifesto__credit {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .manifesto__credit-name {
+    font-size: clamp(18px, 1.4vw, 22px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+  }
+  .manifesto__credit-role {
+    font-size: 14px;
+    color: rgba(241,235,222,0.65);
+    line-height: 1.5;
+  }
+  .manifesto__credit-link {
+    font-size: 13px;
+    color: var(--accent);
+    border-bottom: 1px solid rgba(178,32,32,0.4);
+    padding-bottom: 2px;
+    display: inline-block;
+    transition: border-color .3s var(--ease);
+  }
+  .manifesto__credit-link:hover { border-color: var(--accent); }
+  .manifesto__brand-callout {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: clamp(20px, 2.5vw, 32px);
+  }
+  .manifesto__brand-name {
+    font-size: clamp(18px, 1.4vw, 22px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .manifesto__brand-desc {
+    font-size: 14px;
+    color: rgba(241,235,222,0.7);
+    line-height: 1.55;
+  }
+  .manifesto__brand-accolade {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  @media (max-width: 900px) {
+    .manifesto__grid { grid-template-columns: 1fr; }
+    .manifesto__sidebar { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 32px; }
+  }
+
+  @media (max-width: 880px) {
+    .app-header__nav { display: none; }
+    .app-header__row { grid-template-columns: 1fr auto; }
+    .arc-pill { display: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="app-header-spacer"></div>
+<header class="app-header" id="appHeader">
+  <div class="container">
+    <div class="app-header__row">
+      <a href="https://www.wearepop.com/" target="_blank" rel="noopener noreferrer" class="pop-logo-link" aria-label="POP home">
+        <span class="pop-logo">
+          <svg viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg" fill="var(--cream)" aria-label="POP">
+            <path d="M0 72V8h28.5c7.2 0 12.8 1.8 16.8 5.4 4 3.6 6 8.6 6 15s-2 11.4-6 15c-4 3.6-9.6 5.4-16.8 5.4H14.4V72H0ZM14.4 36.2h13.2c3.8 0 6.7-.9 8.7-2.8 2-1.9 3-4.4 3-7.6s-1-5.7-3-7.6c-2-1.9-4.9-2.8-8.7-2.8H14.4v20.8Z"/>
+            <path d="M92.5 74.4c-6.4 0-12.2-1.5-17.4-4.5-5.2-3-9.3-7.1-12.3-12.3-3-5.2-4.5-11-4.5-17.6s1.5-12.4 4.5-17.6c3-5.2 7.1-9.3 12.3-12.3 5.2-3 11-4.5 17.4-4.5s12.2 1.5 17.4 4.5c5.2 3 9.3 7.1 12.3 12.3 3 5.2 4.5 11 4.5 17.6s-1.5 12.4-4.5 17.6c-3 5.2-7.1 9.3-12.3 12.3-5.2 3-11 4.5-17.4 4.5Zm0-13.6c3.6 0 6.8-.8 9.7-2.5 2.9-1.7 5.1-4 6.8-7 1.6-3 2.5-6.4 2.5-10.3s-.9-7.3-2.5-10.3c-1.7-3-3.9-5.3-6.8-7-2.9-1.7-6.1-2.5-9.7-2.5s-6.8.8-9.7 2.5c-2.9 1.7-5.1 4-6.8 7-1.6 3-2.5 6.4-2.5 10.3s.9 7.3 2.5 10.3c1.7 3 3.9 5.3 6.8 7 2.9 1.7 6.1 2.5 9.7 2.5Z"/>
+            <path d="M135 72V8h28.5c7.2 0 12.8 1.8 16.8 5.4 4 3.6 6 8.6 6 15s-2 11.4-6 15c-4 3.6-9.6 5.4-16.8 5.4h-14.1V72H135Zm14.4-35.8h13.2c3.8 0 6.7-.9 8.7-2.8 2-1.9 3-4.4 3-7.6s-1-5.7-3-7.6c-2-1.9-4.9-2.8-8.7-2.8h-13.2v20.8Z"/>
+          </svg>
+        </span>
+        <span class="arc-pill" aria-label="Prepared for Arc’teryx">Prepared for Arc’teryx</span>
+      </a>
+      <nav class="app-header__nav" aria-label="Primary">
+        <a href="https://www.wearepop.com/work" target="_blank" rel="noopener noreferrer">Work</a>
+        <a href="https://www.wearepop.com/about" target="_blank" rel="noopener noreferrer">About</a>
+        <a href="https://www.wearepop.com/careers" target="_blank" rel="noopener noreferrer">Careers</a>
+      </nav>
+      <div class="app-header__right">
+        <a href="mailto:workwithus@wearepop.com" class="btn btn-small">Let’s talk</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero theme-charcoal">
+  <div class="hero__media" aria-hidden="true">
+    <!-- Replace src with your own sizzle reel mp4 for best results -->
+    <video autoplay muted loop playsinline poster="" preload="auto">
+      <source src="https://archive.org/download/HikingroyaltyFreeStockVideo/Hiking.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__grain" aria-hidden="true"></div>
+
+  <!-- Arc’teryx official logo watermark -->
+  <svg class="hero__arcteryx-logo" viewBox="0 0 192.756 192.756" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill-rule="evenodd" clip-rule="evenodd">
+      <path class="arc-bg" fill="none" d="M0 0h192.756v192.756H0V0z"/>
+      <path d="M56.593 78.832c.289-.144.578-.289.722-.433 1.011-.289 1.444-1.588 2.6-1.444 1.011-1.155 2.455-1.3 3.61-2.311 0-.145.145-.289.434-.578.722-.578-.578-1.011-.578-1.011-.289-.433-.867 0-.867 0-.289.145-.578.434-.867.434-.144.578-.722.578-1.155.866-.577.578-1.299 1.011-2.021 1.444-.578.722-1.444.866-2.022 1.444 0 0-.722.433-1.011 1.155 0 0-1.444 1.3.433.578l.722-.144zM54.86 80.854c0 .144-.145.144-.145.144v.145c-1.011.722-1.588 1.588-2.166 2.455-.722 1.011-1.3 2.022-2.455 2.744-.866 0-1.3.866-2.021 1.155-.145 0-.289-.289-.289-.434 0 0-.433-.866-.289-1.588.434-.144.867-.289 1.156-.578.433-.433.867-.866 1.299-1.3 1.444-1.155 2.744-2.6 4.044-3.754 0 0 1.01-.578.866 1.011zM54.571 77.965c-1.588.578-3.465.578-4.621 1.733-.578.433-1.588-.144-1.877.578.145.145 0 .433 0 .578h-.578l.145 1.155c1.444.145 2.167-1.588 3.466-1.733l.144.145v.433c-.144.144-.433-.289-.722 0-.722.722-1.589 1.3-2.455 1.588-.145.145-.145.578-.434.578l-.145 1.588c.723.145 1.3-.433 1.877-1.011.145-.145.289-.145.434-.289 1.3-1.444 3.177-2.599 4.188-4.332.001 0 .434.289.578-1.011zM86.775 77.676c.144 2.022-.723 3.466-2.167 5.055-1.299.289-2.744 1.3-4.188.433-.866-.433-2.021.144-2.599-.867-.289-.144-.722-.144-.867-.433.145-.433.722-.578 1.011-.867 1.733.289 3.755 1.589 5.199.145.578-.289 1.588-.434 1.588-1.3.145-.578.145-1.155.722-1.444.433 0 .577-.722.722-1.155 0 0 0-1.589.578-1.3 0 0 .433.578 0 1.011v.722h.001zM74.644 69.734c-.578.434-1.155.866-1.3 1.155-2.166.722-4.477 1.155-6.498.145-.289-.434.433-.578 0-1.155.145-.145.289-.289.577-.145.289.722 1.155.289 1.733.434.866.288 1.588-.289 2.311-.145.578-.289.866-.289 1.444-.578h.289s1.733-1.155 1.444.289zM118.545 66.99c-1.01-.867-1.732.289-1.732.289-.289.289-.578.578-.723.866-1.299.578-1.877 2.311-3.176 2.889-.723.722-1.734 1.3-2.6 2.166-1.734.578-3.9.722-5.633 1.589-1.299.433-2.744.722-4.043 1.155-1.59 1.156-3.467 1.444-4.911 2.455-.289.289-.866.433-.722.867.145.433.722.144 1.011.289.289.289 1.01.144 1.01.722-.433.289-1.155.289-1.01.867.578.433 1.299.722 1.877 1.011.867.578 1.877 1.155 2.744 1.444 1.588.723 3.32 1.3 4.91 2.022 1.299.289 2.744.433 3.898 1.011 1.443.433 3.033 1.011 4.621 1.3 1.012.433.145 1.3.289 2.022 0 .433-.434.866-.289 1.299-.723 1.156-.723 2.6-.723 4.043-.289.145-.145.434 0 .722-.289.722-.576 1.589-.721 2.456-.145 0-.145.143-.289.143-.145 1.301-.145 2.168-.289 3.322.723.289 1.588.145 2.311-.145-.434-.867.289-1.588.145-2.6.289-.434.145-1.01.289-1.588.721-2.167.721-4.477.865-6.788 0-.289-.287-.578.145-.866l.289.144c-.145.867.145 1.733 0 2.455.434 1.588 0 3.321.289 5.055 1.012.578-.434 1.732.723 2.311-.145.434.145.867.434 1.01.432.145 1.01-.143 1.588-.721.145-1.59-.723-2.6-.723-4.045-.434-1.01-.145-1.876-.721-2.743 0-.867-.434-1.733-.434-2.6-.434-.289-.289-1.155-.289-1.588-.145-.867 0-2.167-1.156-2.6-1.877-.145-3.754-1.011-5.631-1.444-1.156-.289-2.311-.866-3.467-1.155l-1.299-.434c-1.012-.289-2.166-.433-3.178-1.011-.145-.145-.434-.145-.723-.289 0 0-.145 0-.145-.144-.432-.145-2.887-.867-3.176-1.156-.434-.722.289-.722.289-.722.145 0 2.166 1.011 2.311 1.011.434 0 .576.289.865.289.434.144.723.289 1.156.289 1.443.867 3.033 1.3 4.477 1.733.434.145 1.012.289 1.443.434.145.289.578.289.867.433.867.289 2.021.289 2.889.867.576-.289 1.01.433 1.443.433 1.012.578 2.166.145 3.033.867.723 1.155.434 2.6 1.01 3.899-.432.867 1.012 1.3.434 2.167.289.578.578 1.3 1.156 1.444.434.145.721 0 1.01-.289 0-.722-.434-1.155-.576-1.733.143-1.011-.723-1.877-.578-2.888-.145-.578-.289-1.444-.867-2.022-.434-.578-1.154-1.3-.723-2.166-.143-.289-.576 0-.865-.145-.723-.433-1.732-.577-2.6-.722-.723-.433-1.443-.722-2.311-1.011-.867-.145-1.732-.289-2.455-.433v-.145c-.867.433-1.588-.722-2.455-.867-.578-.433-1.588 0-2.166-.577-.578 0-1.156-.145-1.588-.434-.578 0-1.59.145-1.879-.578-.576-.289-1.299-.289-1.877-.433-.289 0-.434-.144-.578-.144 0-.145-.287-.145-.432-.145-.434 0-1.012-.289-.867-.433s1.154-.433 1.299-.433.289-.145.434-.145c2.021-.867 4.188-1.444 6.211-2.455 1.443.145 2.887-.578 4.332-.578 1.732-1.155 3.031-3.177 4.766-3.899.865-.722 1.443-2.455 2.6-1.877.432-.145.721.145 1.154.145.289-.433.867-.867.723-1.444.147-.434-.72-1.3-.72-1.3zm-2.311-23.25c.145 0 .145.145.145.434 0 1.733.145 3.754.723 5.487.578 2.311 1.01 4.477 1.588 6.932.145 1.011-1.588 1.155-1.154 2.167.145 1.011-.434 1.299-1.012 2.021 0 0 .578.289.867.578 0 0 .432 1.011 1.588.578 0 0 1.012-.289.867-1.156 0-.722.145-1.588.576-2.166-.289-.578.145-1.299-.289-1.877.145-1.3-.576-2.455-.865-3.755 0-.866-.434-1.588-.289-2.311-.578-2.166-1.012-4.188-1.299-6.498l.287-.434c.723-.144.867.867 1.445 1.011.289 1.011 1.443 1.444 1.877 2.311 1.732 1.588 3.178 3.177 4.477 4.91 1.877 1.733 3.609 3.177 5.055 5.199.578.433 1.299 0 1.877.433.867-.577 2.6-.144 2.455-1.732.145-.289.434-.289.723-.289.721.434 1.588 0 2.311-.289 1.877 0 3.754-.433 5.486-.866.434 0 .578-.289.434-.722-.145-.289-.289-.433-.721-.433-1.734.433-3.611 1.155-5.633 1.011l-.145-.144c.145-.578 1.012-.145 1.443-.578 1.012 0 2.6-.289 3.756-.722.865-.867 2.166.578 2.6-.867.289-.578 2.166-.578 1.299-1.444-.578-.144-1.154-.288-1.443.434-1.156-.289-1.734.867-2.889.867 0 0-.145-.145-.145-.289 1.299-.722 2.889-1.011 4.188-2.022.145-.144 0-.433-.289-.433-2.021.578-3.754 1.588-5.631 2.311-.578.289-1.012 1.011-1.734 1.011-1.01.577-2.311.722-3.176 1.733-.578.144-1.012-.145-1.445.144-.576-.289-1.154-.722-1.443-1.3-1.877-2.021-4.332-3.754-6.354-5.92-1.734-1.3-3.611-2.599-5.055-4.333l-1.156-.866c-.287 0-.865 0-1.154.433v.144h-.579-.289c-.145-.144-.289-.144-.432-.289 0 0-.434.145-.867 0 0 0-.723-.289-.434.578 0-.003.144.575-.145 1.008zm15.885 11.842c-.434.145-.289-.289-.576-.433-1.301-.867-2.311-2.311-3.322-3.321-.578-.434-1.012-1.156-1.732-1.588-1.879-1.444-3.467-3.611-5.199-5.055-.434-.578-1.012-1.3-1.588-1.733-.145-.144 0-.433.145-.577.287 0 .721.145.576.433 1.445 2.022 3.467 2.744 5.199 5.343.434 0 .289.145.434.433 2.021 2.022 4.332 4.043 6.498 6.065-.001.288-.29.288-.435.433z"/>
+      <path d="M98.473 49.805c.865-.289 2.166-1.3 2.887-.145l.145-.145c.289 0 .289.434.434.578s.145-.145.289-.145c0-.578.434-.867.867-1.3.721-.289 1.443-.722 2.311-.866-.145-.434-.289-.578-.578-.722 0 .144-.289.289-.289.289-.867.145-1.154 1.155-2.021 1.011l-.145-.434c.867-.578 1.156-1.444 1.443-2.166-.287-.578-1.01 0-1.443-.145-.434-.578-1.154-.722-2.021-.578-.723-.866-1.445-2.021-2.6-2.021-.434-.434-.723-.867-.723-1.444.289-.722.867.145 1.301.145 2.311.722 4.332 2.888 6.932 3.033.434 1.011 1.588.866 2.455 1.011.578.722 1.588.433 2.455.433 1.154.578 2.6.289 3.754.722.289.289.289 1.155.867.867.289 1.011 1.01 1.588 1.299 2.455 1.012.722.578 2.021.723 3.032.145.578-.145 1.155.434 1.733 0 1.011-.578 2.022-1.59 2.599-.432 1.011-1.877.578-2.742 1.011-.723.578-1.445.722-2.023 1.444-.432.867-1.154 1.878-.865 2.889 0 .722-.145 1.3-.289 1.877-.145.867-.434 1.589-.434 2.455-.289.866 0 2.166-1.154 2.455-.289-.145-.723-.145-.578-.578-.578-.289 0-1.011-.578-1.3l.289-1.877c.145-.433.289-.722.434-1.155.434-1.588.578-3.321 1.732-4.621 0-.433-.434-.433-.723-.433l-2.455 1.877c-.721.866-.865 2.021-1.01 3.177-.289 1.011-.434 1.878-1.156 2.6-.145 1.155.578 2.455 0 3.466-.434.145-1.01.578-1.443.145-.867-1.877-.145-4.043.578-5.632.145-.145.289-.434.432-.578.578-1.155.578-2.888 2.023-3.466 0-.144 0-.433-.145-.578l-1.012.578c-.434.289-.867.145-1.299.434-.578 1.011-1.301 1.877-1.59 3.032-1.299 1.733-.865 4.477-1.443 6.643l-.578.578c-.289.145-.723.145-.865-.145-.434-1.3.143-2.599.143-3.899.145-1.011.289-2.022 1.012-2.744v-.434c.145-1.011 1.301-1.732 1.877-2.599l-.145-.433c-.432 0-.432.433-.721.722-.867.578-1.445 1.444-2.023 2.311-.287.434-.576.867-.865 1.155-.867 1.155-1.012 2.455-1.444 3.755-.578 1.011.145 2.311-.722 3.033a2.01 2.01 0 0 1-1.3 0c-.289-.578 0-1.3.145-1.733.289-1.011.145-2.311.289-3.177a19.69 19.69 0 0 1 2.166-3.033l1.301-1.299v-.578c-.434-.145-.723.289-1.012.578-.289.433-.722.867-1.011 1.299-2.022 2.311-4.188 4.766-3.61 8.231-.433.434-1.011.434-1.444.578-.578-.144-.578-.866-.722-1.299.578-1.444.144-3.322 1.588-4.333-.145-1.299 1.3-1.733 1.733-2.744.289 0 .289-.289.578-.434 0 0 .145-.145.289 0 0-.577.289-1.011.433-1.444-.144-.145-.144-.433-.433-.289-.722.433-1.444 1.011-2.166 1.732-1.589 1.733-2.744 4.043-3.322 6.21-.289.866-.289 2.021-.867 2.744-.577 0-1.155 0-1.444-.289-.289-2.022.722-3.466 1.3-5.199.289-.434-.145-1.156.289-1.444a9.752 9.752 0 0 0 1.589-2.022c.577-.577 1.733-.433 1.877-1.299 0-.867-1.444-.433-1.444-.433-.289.289-1.011.144-1.011.144-.289-.144-.578 0-.578 0-.434.433-1.589.578-2.167.722-.144.145-.289.289-.722.866-.434.722-.867 1.589-.434 2.455-.144 1.155-.289 2.166-.289 3.321.289.722.433 1.733.433 2.6v1.011l.719.291s-.433.289-.578 1.011c-.433.578-.577 1.444-.866 2.021-.433.434-.722 1.011-.866 1.589 0 1.3-1.589 1.3-2.455 1.733-1.444-.289-2.744-.289-4.043-.722-.722-.722-1.733-.577-2.599-1.011-1.733-.145-3.033-1.589-4.477-2.455-1.299-.722-2.599-1.444-3.899-2.455-.434-.289-1.011-.433-1.589-.578h-.145c-.866-1.733-2.455-1.299-2.455-1.299-.145.145-.289.145-.433.289-1.011.867-2.311 1.155-3.61 1.588-.289.145-.722.289-1.011-.144.144-1.011 1.011-1.877 1.444-2.888 2.599-1.011 5.343.289 7.654 1.444 1.011.722 2.021 1.588 3.177 1.877 1.589 1.011 3.177 2.311 4.91 3.177 1.011 0 1.877.434 2.744.867.722.289 1.732.145 2.599.578.433 0 1.011.289 1.3-.289.722-1.3 2.455-1.732 2.311-3.466 1.444-1.733-.145-3.754 0-5.776.433-.433.433-1.299.289-1.877.289-1.011.433-1.877.722-2.889.145-.289 1.011-1.011.722-1.444-.867-.433-1.3 1.444-2.022 1.155s.434-.867-.289-1.3c0 0-1.155 1.156-1.733 1.588-.145.145-.145.289-.145.289h-.578c-.866 1.011-2.166 1.011-2.888 2.311-.578 0-1.011.145-1.444.433-.578.434-2.021.434-2.021.434-.867 0-1.444.577-1.444.577-.433.145-.866.289-1.444.289-1.011.722-2.311.289-3.466.289-.578 0-.145-1.011-.867-1.155-.433-1.156-.866-2.311-1.155-3.466-.145-.577-.145-1.011-.289-1.588-1.155-1.588-.289-3.899-1.733-5.343-.578-.145-.867-.866-1.011-1.444-.722-.578-.577-1.588-1.3-2.022-.433-1.3-1.3-2.166-1.877-3.321l-.289-.145c-1.011.578-.578 1.877-.866 2.888-.434.578 0 1.3 0 2.022-.145 2.021-.722 3.899-1.011 5.921-.434.866-.145 2.166-.578 3.032-.144.145-.289.434-.433.578-.433.144-.867 0-1.011-.289v-.289c.289-1.877.433-3.755.433-5.632.578-.722.433-1.733.722-2.455.145-.866.578-1.877.145-2.455-.867.434-1.011 1.444-1.156 2.311-.433 1.3-.433 3.033-1.444 4.188-.145.578-.289 1.156-1.011 1.3-1.011-.433.145-1.444.145-2.311 1.011-.722.578-2.167.722-3.321.145-1.3 1.444-2.167 1.733-3.466-.433-.433-1.011.289-1.588.145-1.011 2.022-3.177 1.011-4.621 2.166-.722.867-1.733.867-2.311 1.011-.433-.433-.433-.722 0-1.588.578.145 1.3.145 1.733-.434 1.3-.144 2.311-1.155 3.321-1.877.866-.722 2.022-.722 2.889-1.444.289 0 .866.145.866-.289-1.011-1.299 1.011-.577 1.3-1.444.433-1.155 1.733-.866 2.599-1.3.289-.144.867-.289 1.155 0 1.156.434 1.444 1.733 1.588 2.744-.144.289-.144.722-.722.578l-.867-1.733c-.289.145-.578 0-.722.289-.289.722.578.578.722 1.011.145 1.155 1.156 1.3 1.733 1.733l.867 1.732c.722 1.444 1.588 3.033 2.166 4.621 1.011 2.166 2.022 4.622 2.455 7.221-.289 1.011.722 1.589 1.3 2.167 1.299.289 2.744-.289 3.465-1.011 1.156-.289 2.311-.577 3.466-1.011 1.011-.866 2.166-1.3 3.177-2.455.144-.578.289-1.011.144-1.877-.144-1.444-1.011-.289-1.444-1.156-.578-.722.866-.722.289-1.444-.867-1.589-2.888-1.155-4.188-2.021-1.011-.867-1.3-2.022-2.021-3.033-.578-.578-1.3-.433-2.022-.578-.866-.289-1.3-1.588-2.455-1.588-1.155-1.3-2.889-1.733-4.044-3.033-.289-.144-1.155-.144-.866-.722-1.011-.867-2.311-1.588-3.177-2.455-.433-.145-.866 0-1.3-.289-.144-1.155-1.444-.866-2.166-1.299-.722-1.3-2.599-.722-3.033-2.167-1.877 0-3.177-1.155-4.766-1.588-.577-.289-1.155-.578-1.588-1.011 0 0-.144-.578.289-1.155 1.156.722 2.311 1.155 3.466 1.732.722 0 1.444.434 2.022.578 2.022.289 3.466 2.166 5.199 2.888 1.011-.289 1.444.867 2.311 1.155.722.289 1.155 1.155 1.878 1.3.866.866 1.877 1.155 2.743 1.733.722.866 1.444 2.455 2.744 2.166 1.011.433 1.444 1.444 2.166 2.021 1.011-.289 1.733.434 2.455.867.145.578.578.866 1.011 1.155.578.433 1.011.722.578 1.588.578.578.289-.722 1.011-.578.145 0 .145.145.145.289h1.011c.722.578 1.3 1.444 1.877 2.311.289.434.722-.433 1.011.145 1.011.145 1.444 1.3 2.455 1.3.867-.145 1.877.145 2.744.434.722.145.578.866 1.011 1.299.867-.578 1.877-.578 3.033-.433.144 0 .289.145.433.289.867.433 2.167.433 2.167.433.433.145 2.021 0 2.021 0 .578-.144 2.022 0 2.022 0 1.444-.289 1.877.145 2.021.434.145.145.289.145.434.434.289-.434.289-1.011.867-1.011 0 .144.145.144.145.144.145.145.289 0 .289-.144 1.01 0 1.299-1.011 2.166-1.155.432-.144.721-.722 1.154-.578.867-.722 1.877 0 2.889-.289 1.732-.433 3.609-.433 4.91-1.732.434-.145 1.154.145 1.443-.434.723-.145 1.445-.289 2.021-.722 1.012-.578.723-1.733 1.012-2.6v-.722c-.434-.722 0-2.022-.867-2.599-1.154.145-1.154-1.733-2.455-1.589-.865.145-1.732-.289-2.742-.144-1.445 1.155-3.9 1.733-4.334 3.899-.432.289-1.01.578-.721 1.3-.145.144-.434.433-.867.289-.578-.289-.289-1.155-.434-1.588.289-.433.289-1.011.289-1.444l-.289.145c-.578.433-1.154.145-1.443-.289-.867.578-1.445 1.3-2.455 1.589-.723-.289-1.444-.578-2.022-1.011-.578.144-1.011-.434-1.444 0-.578-.578-1.011-1.444-1.444-2.167h.145c-.289 0-.577-.289-.433-.433 0 0 .145-.145.289 0-.866-1.011-1.299-2.166-1.299-3.321-.578-1.011-.578-2.311-1.155-3.321-1.444-1.589-1.877-3.61-2.599-5.344.144-.577.577-1.155 1.155-1.011 1.011.867 2.311.867 3.322 1.444.145.289.577.722 0 .866-.578-.289-1.588.434-2.022-.577a.793.793 0 0 0-.722.433c0 .289.289.722.722.867.289 1.011 1.155 1.877 1.3 2.888.722.289.289 1.3 1.011 1.589-.289.577.289 1.011.145 1.732.578.289.433 1.156 1.011 1.589.433 1.588 1.3 3.177 2.744 3.899.288 0 .577-.144.866-.289h-.145c-.005-.005.573-.294 1.007-.294z"/>
+      <path d="M96.306 47.784s0-.145-.144-.145v-.434c.722-1.011 1.155.289 2.022.145 0-.866-.578-1.877-1.589-2.311 0-.577-1.011-.722-1.155-1.444-.578 0-.722-.867-1.3-.722-.289.145-.867.289-.867.722.722 1.444 1.155 3.321 2.167 4.621-.001 0 1.443.723.866-.432z"/>
+      <path d="M77.388 122.877v7.799l4.765-7.799h-4.765zM75.655 147.572c-.433 1.01-.866 2.166-.866 2.166-2.311.576-5.488 1.01-7.798 1.01-8.665 0-14.297-5.344-14.152-13.141.144-8.377 5.776-13.143 14.296-12.998 3.322 0 6.209 1.012 7.076 1.156h.867s-.145 1.154 0 2.311c.145 1.299.577 2.6.577 3.754 0 .289-.289-.145-.289-.145-.722-3.031-5.632-5.055-8.375-5.055-6.499 0-10.831 4.189-10.831 10.977.145 5.486 4.332 10.83 10.397 10.83 3.321 0 7.076-.865 9.242-3.609l.578.434s-.289 1.009-.722 2.31zM109.592 135.73h5.633c1.154 0 3.465.145 4.043 0 .434-.145.723-.578.865-.434.145 0 .145.145.145.145V139.05c-.145 0-.145-.145-.721-.434-.723-.145-3.178-.145-4.332-.145h-5.633v8.811h7.943c1.154 0 2.455-.145 3.031-.289.434-.289.867-.723 1.012-.578.145 0 0 .145 0 .145 0 .867-.145 1.732-.289 2.889v.721h-13.43c-1.156 0-1.301.145-2.166.145 0 0-.145 0-.289-.145 0-.143.145 0 .434-.721.432-.723.432-2.021.432-3.178v-9.098-8.232c0-1.154 0-2.453-.432-3.176-.289-.723-.434-.578-.434-.723.145-.145.289-.145.289-.145.865 0 1.01.145 2.166.145h12.996v3.323s.145.145 0 .145c-.145.145-.434-.289-.865-.434-.578-.145-1.879-.289-2.889-.289l-7.51-.145v8.088h.001z"/>
+      <path d="M21.212 124.898s6.209 14.586 9.098 20.939c.722 1.734 1.588 3.322 1.877 3.611.578.721.722.721.722.721h-3.321c-1.156 0-1.733.145-1.733 0 .289-.576.145-1.299-.145-2.166-.145-.145-.577-1.299-.722-1.732-2.022-4.477-6.21-14.441-6.21-14.441-.289-.578-.145-.578-.433 0 0 0-4.188 9.965-6.209 14.441-.145.434-.578 1.588-.722 1.732-.289.867-.433 1.59-.145 2.166 0 .145-.433 0-1.444 0H8.504l.578-.721c.289-.289 1.155-1.877 2.022-3.611 2.744-6.354 9.098-20.939 9.098-20.939.288-.722.577-.722 1.01 0zM91.974 127.932v18.195c0 1.156 0 2.455-.289 3.178l-.433.723c0 .143.289.143.289.143.867 0 1.011-.143 2.311-.143 1.011 0 1.3.143 2.166.143 0 0 .145 0 .145-.143 0-.145-.289-.289-.434-.867-.289-.434-.289-1.877-.289-3.033v-18.195h3.609c1.156 0 3.178.145 3.611.289.578.145.723.578.867.434.143 0 .143-.145.143-.145v-3.467H83.02c0 1.012-.145 2.744-.145 3.611 0 0-.145.145 0 .145.145.143.434-.289.867-.434.578-.145 2.744-.434 3.899-.434h4.333z"/>
+      <path d="M152.049 137.896v6.932c0 1.154-.145 3.898-.434 4.621-.289.578-.434.578-.434.721 0 .145.289 0 .289 0h4.622s.145.145.145 0c.145-.143-.289-.432-.434-.865-.145-.578-.289-2.021-.289-3.033v-8.375s7.654-11.986 8.232-12.131c.865-.145 1.154-.723 1.154-.723h-3.176c-1.156 0-2.311-.145-2.311 0 .289.578.145 1.156-.289 2.021-.434.723-4.766 7.51-5.055 7.799-.289-.289-4.766-6.932-5.199-7.799-.578-.721-.578-1.443-.434-2.021.145 0-1.443.145-2.6.145-1.01 0-3.32-.145-3.32-.145s.289 0 1.01.723c.724.578 8.523 12.13 8.523 12.13z"/>
+      <path d="M174.865 137.318s7.799 11.553 8.52 12.131c.723.721.867.721.867.721s-2.166-.143-3.178-.143c-1.154 0-2.742.143-2.742.143.287-.576.145-1.299-.289-2.021-.434-.865-4.766-7.508-5.055-7.797-.289.289-4.621 6.932-5.055 7.797-.434.723-.578 1.445-.289 2.021 0 0-1.299-.143-2.455-.143-1.01 0-3.32.143-3.32.143s.287 0 1.01-.721c.723-.578 8.377-11.842 8.377-11.842s-7.365-11.408-8.377-11.986c-.865-.434-.723-.578-.723-.578h3.033c1.156 0 2.744-.145 2.6 0-.145.578-.145 1.301.434 2.021.434.723 4.621 7.221 4.91 7.51.289-.289 4.477-6.643 4.91-7.365.576-.865.576-1.588.434-2.166 0-.145 1.443 0 2.598 0h3.033s-.578.289-1.154.867c-.724.578-8.089 11.408-8.089 11.408z"/>
+      <path d="M132.842 138.762s6.209 8.955 6.787 9.676c.578 1.012 1.877 2.166 3.898 2.166h2.023s-.145-.145-.867-.721c-1.299-1.156-7.654-10.254-7.654-10.254 2.744-1.156 5.777-3.033 5.633-7.221-.145-6.064-4.332-7.654-10.688-7.365h-3.465c-1.156 0-1.588-.145-2.455-.145 0 0-.145 0-.289.145 0 .145.289.289.289.289.578.723.578 4.188.578 5.344v15.451c0 1.156 0 2.6-.289 3.322-.434.578-.434.578-.434.721 0 .145.145 0 .145 0h4.621s.145.145.289 0c0-.143-.289-.432-.578-.865-.145-.578-.289-2.021-.289-3.178v-18.195c0-1.156.578-1.301 2.021-1.301 4.91 0 7.076 2.455 7.076 6.066.001 3.899-2.165 5.776-6.352 6.065z"/>
+      <path d="M40.13 138.762s6.354 8.955 6.788 9.676c.722 1.012 1.877 2.166 4.043 2.166h1.878l-.722-.721c-1.3-1.156-7.654-10.254-7.654-10.254 2.744-1.156 5.776-3.033 5.632-7.221-.289-6.064-4.332-7.654-10.687-7.365h-3.466c-1.3 0-1.588-.145-2.6-.145 0 0-.144 0-.144.145-.145.145.289.289.289.289.433.723.433 4.188.433 5.344 0 2.311.145 13.719.145 15.451 0 1.156-.145 2.6-.434 3.322-.289.578-.433.578-.433.721.144.145.289 0 .289 0h4.477s.289.145.289 0c0-.143-.289-.432-.434-.865-.289-.578-.289-2.021-.289-3.178v-18.195c0-1.156.577-1.301 2.021-1.301 4.766 0 6.932 2.455 7.076 6.066.001 3.899-2.165 5.776-6.497 6.065z"/>
+    </g>
+  </svg>
+
+  <div class="container hero__inner">
+    <div class="hero__brief">
+      <span class="hero__brief-tag">For Arc’teryx</span>
+      <span class="hero__brief-line">An Outdoor Acquisition Brief — POP</span>
+    </div>
+    <h1 class="h-display hero__headline">
+      Built for <span class="arc-word">Arc’teryx</span>. Built for the brands built on real experiences.
+    </h1>
+    <p class="hero__sub lede">
+      Outdoor isn’t a category — it’s a <i>posture</i>. POP helps brands that live in the elements
+      translate physical experience into digital systems that actually feel like the thing.
+    </p>
+    <div class="hero__meta">
+      <div class="hero__meta-line">
+        Seattle to North Vancouver — same coast, same mountains.<br>
+        Designed at the intersection of retail, sport &amp; technology.
+      </div>
+      <div class="hero__scroll">
+        <span>Scroll</span><span class="line"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="blade theme-evergreen">
+  <div class="container">
+    <div class="intro__grid">
+      <div class="scroll-animate">
+        <div class="label-small">The Brief</div>
+      </div>
+      <div class="intro__copy scroll-animate" data-delay="1">
+        <h2 class="h-1">
+          <span class="arc-tag">Arc’teryx</span> doesn’t just sell <i>products</i>.
+          You enable <i>experiences</i>—and most digital still treats them like inventory.
+        </h2>
+        <p>
+          Climbing a route. Skinning a line. Being in the alpine. That’s the gap.
+          POP exists to close it. We challenge the digital status quo, helping outdoor brands
+          transform their digital experiences from <i>transactional</i> to <i>experiential</i>—
+          connecting people more deeply to the brands, products, and environments they care about.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<section class="theme-charcoal">
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">For <span class="marquee__arc">Arc’teryx</span> <span class="marquee__dot"></span> Retail <i>systems</i> <span class="marquee__dot"></span> Sport <i>performance</i> <span class="marquee__dot"></span> Outdoor <i>meaning</i> <span class="marquee__dot"></span> Tech <i>enablement</i> <span class="marquee__dot"></span> Coast Mountains <i>authenticity</i> <span class="marquee__dot"></span></span>
+      <span class="marquee__item">For <span class="marquee__arc">Arc’teryx</span> <span class="marquee__dot"></span> Retail <i>systems</i> <span class="marquee__dot"></span> Sport <i>performance</i> <span class="marquee__dot"></span> Outdoor <i>meaning</i> <span class="marquee__dot"></span> Tech <i>enablement</i> <span class="marquee__dot"></span> Coast Mountains <i>authenticity</i> <span class="marquee__dot"></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- MTB MANIFESTO -->
+<section class="blade theme-evergreen-deep manifesto">
+  <div class="container">
+    <div class="label-small scroll-animate" style="margin-bottom: clamp(36px, 5vw, 64px); color: var(--bone);">We live in this world</div>
+    <div class="manifesto__grid">
+      <div class="scroll-animate">
+        <h2 class="manifesto__quote">
+          You've entered the <span class="accent">MTB world</span>.<br>
+          The water is warm.<br>
+          <i>We know it well.</i>
+        </h2>
+      </div>
+      <div class="manifesto__sidebar scroll-animate" data-delay="1">
+        <p class="lede" style="color: rgba(241,235,222,0.82);">
+          POP's executive creative director has spent decades inside the cycling and outdoor industry—
+          from art directing campaigns for Specialized, S-Works, and Body Geometry to building brands
+          that riders actually care about. This isn't adjacent expertise. It's first-person fluency.
+        </p>
+        <div class="manifesto__credit">
+          <span class="manifesto__credit-name">Andrio Abero</span>
+          <span class="manifesto__credit-role">Executive Creative Director, POP<br>Former Specialized creative lead — brand, product &amp; athlete campaigns</span>
+          <a href="http://www.andrioabero.com/archive" target="_blank" rel="noopener noreferrer" class="manifesto__credit-link">View archive &rarr;</a>
+        </div>
+        <div class="manifesto__brand-callout">
+          <div class="manifesto__brand-name">Apogee Bikes</div>
+          <p class="manifesto__brand-desc">
+            A PNW-born, steel full-suspension mountain bike company co-founded by our ECD.
+            Hand-welded frames from Seattle. Modular suspension designed in Tahoe.
+            100% US-made. Not a side project—proof of craft.
+          </p>
+          <span class="manifesto__brand-accolade">Mountain Bike of the Year 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="blade theme-charcoal">
+  <div class="container">
+    <div class="pillars__head scroll-animate">
+      <div class="label-small" style="margin-bottom: 28px;">Why POP for Arc’teryx</div>
+      <h2 class="h-1">
+        Three things <i>most agencies</i> don’t put together.
+      </h2>
+    </div>
+
+    <div class="pillar-row scroll-animate">
+      <div class="pillar-num">01<span class="dot">.</span></div>
+      <div class="pillar-title">We understand the <i>business</i> of retail.</div>
+      <div class="pillar-body">
+        <p>
+          Not just selling products—scaling systems and enabling meaningful experiences.
+          Decades of work for the retailers and category leaders who define the floor: the architectures,
+          the merchandising logic, the operations that translate a brand promise into something a shopper can feel.
+        </p>
+        <div class="pillar-tags">
+          <span class="pillar-tag">Product systems</span>
+          <span class="pillar-tag">Commerce architecture</span>
+          <span class="pillar-tag">Merchandising</span>
+          <span class="pillar-tag">Connected retail</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-row scroll-animate">
+      <div class="pillar-num">02<span class="dot">.</span></div>
+      <div class="pillar-title">We understand <i>performance</i> and sport.</div>
+      <div class="pillar-body">
+        <p>
+          We translate performance into experience design. We’ve spent decades at the
+          intersection of athlete, product, and platform—and we know how to make a digital
+          experience that respects the physics of effort and the language of the field.
+        </p>
+        <div class="pillar-tags">
+          <span class="pillar-tag">Athlete-grade UX</span>
+          <span class="pillar-tag">Product storytelling</span>
+          <span class="pillar-tag">Membership &amp; loyalty</span>
+          <span class="pillar-tag">Data-driven personalization</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-row scroll-animate">
+      <div class="pillar-num">03<span class="dot">.</span></div>
+      <div class="pillar-title">We understand the <i>meaning</i> behind outdoor.</div>
+      <div class="pillar-body">
+        <p>
+          Purpose. Conservation. Culture. The outdoor category isn’t a vertical—it’s a value system,
+          and we have real proximity to the lifestyle. PNW-rooted, Coast Mountains adjacent, personally invested,
+          and built to move the category forward, not just decorate it.
+        </p>
+        <div class="pillar-tags">
+          <span class="pillar-tag">Purpose &amp; conservation</span>
+          <span class="pillar-tag">Community &amp; culture</span>
+          <span class="pillar-tag">Editorial storytelling</span>
+          <span class="pillar-tag">Brand experience</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSLATION LEDGER -->
+<section class="blade theme-charcoal" style="padding-top: 0;">
+  <div class="container">
+    <div class="translate">
+      <div class="translate__head scroll-animate">
+        <div class="label-small" style="margin-bottom: 28px;">From physical to digital</div>
+        <h2 class="h-2">We know how to <i>translate</i>—from what a product does to what a person feels.</h2>
+        <p>Five fluencies. We bring them all to bear, every brief, every blade.</p>
+        <div class="translate__arc-mark">Arc’teryx.</div>
+      </div>
+
+      <div class="translate-ledger scroll-animate" data-delay="1">
+        <div class="ledger-row">
+          <span class="ledger-num">01</span>
+          <span class="ledger-from">Retail</span>
+          <span class="ledger-arrow">→</span>
+          <span class="ledger-to">product systems</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-num">02</span>
+          <span class="ledger-from">Sport</span>
+          <span class="ledger-arrow">→</span>
+          <span class="ledger-to">performance</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-num">03</span>
+          <span class="ledger-from">Outdoor</span>
+          <span class="ledger-arrow">→</span>
+          <span class="ledger-to">meaning</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-num">04</span>
+          <span class="ledger-from">Tech</span>
+          <span class="ledger-arrow">→</span>
+          <span class="ledger-to">enablement</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-num">05</span>
+          <span class="ledger-from">PNW</span>
+          <span class="ledger-arrow">→</span>
+          <span class="ledger-to">authenticity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="blade theme-mint-light">
+  <div class="container">
+    <div class="diff__grid">
+      <div class="diff__head scroll-animate">
+        <div class="label-small" style="margin-bottom: 24px;">How we work</div>
+        <h2 class="h-2">We see the outdoor category <i>differently</i>—and we’re built to move it forward.</h2>
+        <p>
+          We’ve spent decades designing at the intersection of retail, sport, and technology—
+          where product, performance, and experience come together.
+        </p>
+      </div>
+      <div class="scroll-animate" data-delay="1">
+        <ul class="underline-list-big">
+          <li><span><i>Experience-</i>first</span><span class="num">01</span></li>
+          <li><span>System <i>thinkers</i></span><span class="num">02</span></li>
+          <li><span>Built on <i>partnerships</i></span><span class="num">03</span></li>
+          <li><span>Strong in <i>complex</i> ecosystems</span><span class="num">04</span></li>
+          <li><span>Tech-enabled, <i>connected</i></span><span class="num">05</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BLADE -->
+<section class="blade theme-evergreen-deep cta-blade">
+  <svg class="cta-blade__topo" viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="rgba(241,235,222,0.5)" stroke-width="1" fill="none">
+      <path d="M0,500 Q400,420 800,470 T1600,440"/>
+      <path d="M0,470 Q400,390 800,440 T1600,410"/>
+      <path d="M0,440 Q400,360 800,410 T1600,380"/>
+      <path d="M0,410 Q400,330 800,380 T1600,350"/>
+      <path d="M0,380 Q400,300 800,350 T1600,320"/>
+      <path d="M0,350 Q400,270 800,320 T1600,290"/>
+      <path d="M0,320 Q400,240 800,290 T1600,260"/>
+      <path d="M0,290 Q400,210 800,260 T1600,230"/>
+      <path d="M0,260 Q400,180 800,230 T1600,200"/>
+      <path d="M0,230 Q400,150 800,200 T1600,170"/>
+      <path d="M0,200 Q400,120 800,170 T1600,140"/>
+    </g>
+  </svg>
+  <div class="container">
+    <div class="cta-blade__inner">
+      <div class="scroll-animate">
+        <div class="label-small" style="margin-bottom: 32px; color: var(--bone);">Let’s connect</div>
+        <h2>
+          <span class="arc-emph">Arc’teryx</span>, let’s translate your <i>experiences</i> into digital ones.
+        </h2>
+      </div>
+      <div class="cta-blade__action scroll-animate" data-delay="1">
+        <p class="cta-blade__lede">
+          We’d love to put a workshop on your calendar—category audit, opportunity map,
+          and a point of view on where the experience should go next.
+        </p>
+        <a href="mailto:workwithus@wearepop.com?subject=POP%20%C3%97%20Arc%E2%80%99teryx%20%E2%80%94%20Outdoor%20Acquisition%20Workshop" class="btn btn-solid">Start a conversation →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="app-footer theme-charcoal">
+  <svg class="app-footer__topo" viewBox="0 0 1600 800" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="rgba(241,235,222,0.6)" stroke-width="1" fill="none">
+      <path d="M0,700 Q400,620 800,670 T1600,640"/>
+      <path d="M0,650 Q400,570 800,620 T1600,590"/>
+      <path d="M0,600 Q400,520 800,570 T1600,540"/>
+      <path d="M0,550 Q400,470 800,520 T1600,490"/>
+      <path d="M0,500 Q400,420 800,470 T1600,440"/>
+      <path d="M0,450 Q400,370 800,420 T1600,390"/>
+      <path d="M0,400 Q400,320 800,370 T1600,340"/>
+      <path d="M0,350 Q400,270 800,320 T1600,290"/>
+    </g>
+  </svg>
+  <div class="container">
+    <div class="footer__eyebrow label-small">Contact us</div>
+    <div class="footer__main">
+      <h3>Got anything that needs <i>POP?</i></h3>
+      <h4>Let’s connect. Send us an email.<br>
+        <a href="mailto:workwithus@wearepop.com">workwithus@wearepop.com</a>
+      </h4>
+    </div>
+    <div class="footer__bottom">
+      <nav class="footer__nav">
+        <div class="social-links">
+          <a href="https://www.instagram.com/pop_agency" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/pop" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.04 0 4.78 2.66 4.78 6.13V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.78 0-2.05 1.4-2.05 2.82V21h-4z"/>
+            </svg>
+          </a>
+        </div>
+        <a href="https://www.wearepop.com/work" target="_blank" rel="noopener noreferrer" class="arrow-link">Explore our work <span class="arr">→</span></a>
+        <a href="https://www.wearepop.com/about" target="_blank" rel="noopener noreferrer" class="arrow-link">Read about us <span class="arr">→</span></a>
+        <a href="https://www.wearepop.com/careers" target="_blank" rel="noopener noreferrer" class="arrow-link">Join our team <span class="arr">→</span></a>
+      </nav>
+      <div class="footer__copyright">
+        <p>© 2026, POP Inc. All rights reserved. &nbsp;| &nbsp;<a href="https://www.wearepop.com/legal-terms" target="_blank" rel="noopener noreferrer">Privacy Policy</a> &nbsp;| &nbsp;<a href="https://www.wearepop.com/legal-terms#your-california-privacy-rights" target="_blank" rel="noopener noreferrer">Your California Privacy Rights</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const header = document.getElementById('appHeader');
+    let lastY = window.scrollY;
+    let ticking = false;
+    function update() {
+      const y = window.scrollY;
+      if (y > 80 && y > lastY) header.classList.add('is-hidden');
+      else header.classList.remove('is-hidden');
+      lastY = y;
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+  })();
+
+  (function () {
+    const items = document.querySelectorAll('.scroll-animate');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('is-in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(el => io.observe(el));
+  })();
+</script>
+</body>
+</html>
