@@ -6,6 +6,16 @@
 <title>POP Signals — Adobe Summit 2026 Takeaways</title>
 <meta name="description" content="POP Signals 05.11.2026 — Chris Dressler on what Adobe announced at Summit 2026 and what it means for your Adobe stack strategy." />
 
+<!-- PostHog -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Mi Ri init Vi Gi Rr Wi Ji Bi capture calculateEventProperties tn register register_once register_for_session unregister unregister_for_session an getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync un identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty nn Xi createPersonProfile setInternalOrTestUser sn Hi cn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Ki debug Lr rn getPageViewId captureTraceFeedback captureTraceMetric Di".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_poJzEDrew5rxLGe97Q3uKPfCTDWz94wgTXbfyF2nDNtJ', {
+    api_host: 'https://us.i.posthog.com',
+    defaults: '2026-01-30',
+    person_profiles: 'identified_only',
+  });
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet" />
@@ -1270,6 +1280,50 @@
     items.forEach(el => io.observe(el));
   })();
 
+  // Analytics — capture engagement on video + CTAs
+  (function () {
+    const EPISODE = 'e1_adobesummit';
+    const fire = (name, props) => {
+      if (typeof posthog === 'undefined') return;
+      try { posthog.capture(name, Object.assign({ episode: EPISODE }, props || {})); } catch (_) {}
+    };
+
+    const video = document.getElementById('briefingVideo');
+    if (video) {
+      let played = false;
+      const milestones = [25, 50, 75];
+      const hit = new Set();
+      video.addEventListener('play', () => {
+        if (played) return;
+        played = true;
+        fire('video_play', { video: 'long' });
+      });
+      video.addEventListener('timeupdate', () => {
+        if (!video.duration) return;
+        const pct = (video.currentTime / video.duration) * 100;
+        for (const m of milestones) {
+          if (pct >= m && !hit.has(m)) {
+            hit.add(m);
+            fire('video_progress', { video: 'long', percent: m });
+          }
+        }
+      });
+      video.addEventListener('ended', () => fire('video_complete', { video: 'long' }));
+    }
+
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (href.includes('pop-chris-short.mp4')) {
+        fire('short_version_click');
+      } else if (href.includes('pop-chris-transcript.txt')) {
+        fire('transcript_download');
+      } else if (href.startsWith('mailto:')) {
+        fire('contact_click', { email: href.replace(/^mailto:/, '').split('?')[0] });
+      }
+    });
+  })();
 </script>
 </body>
 </html>
