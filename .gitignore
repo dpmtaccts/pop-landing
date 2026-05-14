@@ -1,0 +1,7 @@
+.vercel
+.env*.local
+.DS_Store
+
+# Source assets hosted on Vercel Blob — not deployed via the repo
+signals/*.mp4
+signals/POP_Chris Transcript.txt

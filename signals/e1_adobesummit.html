@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POP Signals — Adobe Summit 2026 Takeaways</title>
+<meta name="description" content="POP Signals 05.11.2026 — Chris Dressler on what Adobe announced at Summit 2026 and what it means for your Adobe stack strategy." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet" />
+
+<style>
+  /* === POP PALETTE (matches their site themes) === */
+  :root {
+    --charcoal:        #1d1f1e;
+    --charcoal-2:      #25282a;
+    --evergreen:       #1d3a31;
+    --evergreen-deep:  #142822;
+    --mint-light:      #c7d4c4;
+    --mint-text:       #1d3a31;
+    --white:           #ffffff;
+    --off-white:       #f4f4f0;
+
+    --line:            rgba(255,255,255,0.16);
+    --line-soft:       rgba(255,255,255,0.08);
+    --line-dark:       rgba(29,31,30,0.14);
+    --line-mint:       rgba(29,58,49,0.18);
+
+    --font:    "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-italic: "Fraunces", "Geist", serif;
+    --container: 1280px;
+    --container-narrow: 1040px;
+    --pad-x: clamp(20px, 4vw, 64px);
+    --ease: cubic-bezier(.2, .7, .2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--white);
+    color: var(--charcoal);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "ss02";
+  }
+  img, video, svg { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  ul, ol { list-style: none; }
+
+  /* === POP THEME SYSTEM === */
+  .theme-charcoal    { background: var(--charcoal); color: var(--white); --line-current: var(--line); --accent: var(--mint-light); }
+  .theme-evergreen   { background: var(--evergreen); color: var(--white); --line-current: var(--line); --accent: var(--mint-light); }
+  .theme-mint-light  { background: var(--mint-light); color: var(--charcoal); --line-current: var(--line-mint); --accent: var(--evergreen); }
+  .theme-white       { background: var(--white); color: var(--charcoal); --line-current: var(--line-dark); --accent: var(--evergreen); }
+
+  /* === TYPOGRAPHY (POP uses italic <i> as the signature emphasis) === */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    letter-spacing: -0.028em;
+    line-height: 1.04;
+  }
+  h1 i, h2 i, h3 i, h4 i, h5 i, h6 i, p i {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  /* POP-equivalent heading scale: h1–h7 */
+  .h-display { font-size: clamp(44px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.038em; font-weight: 500; }
+  .h1 { font-size: clamp(40px, 5.4vw, 80px); line-height: 1.0; letter-spacing: -0.035em; font-weight: 500; }
+  .h2 { font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; }
+  .h3 { font-size: clamp(26px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 500; }
+  .h4 { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; }
+  .h7 { font-size: clamp(18px, 1.5vw, 24px); line-height: 1.4; letter-spacing: -0.01em; font-weight: 400; }
+
+  .label-small {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .label-small.has-bar::before {
+    content: "";
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: currentColor;
+    vertical-align: middle;
+    margin-right: 12px;
+    transform: translateY(-2px);
+  }
+
+  p { font-size: clamp(16px, 1.1vw, 18px); line-height: 1.65; }
+  .lede { font-size: clamp(18px, 1.35vw, 22px); line-height: 1.5; font-weight: 400; }
+
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding-inline: var(--pad-x);
+  }
+  .container-narrow {
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+    padding-inline: var(--pad-x);
+  }
+
+  /* === HEADER (precise POP replica) === */
+  .app-header-spacer { height: 88px; }
+  .app-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    background: var(--charcoal);
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: transform .35s var(--ease);
+  }
+  .app-header.is-hidden { transform: translateY(-100%); }
+  .app-header__row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    height: 88px;
+    gap: 24px;
+  }
+  .pop-logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pop-logo {
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--white);
+  }
+  .signals-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mint-light);
+    padding-left: 14px;
+    border-left: 1px solid rgba(255,255,255,0.18);
+    line-height: 1.2;
+  }
+  .signals-eyebrow span { display: block; color: rgba(255,255,255,0.55); font-size: 10px; margin-top: 2px; }
+
+  .app-header__nav {
+    display: flex;
+    gap: 36px;
+    justify-self: center;
+  }
+  .app-header__nav a {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: rgba(255,255,255,0.78);
+    transition: color .25s var(--ease);
+    position: relative;
+    padding-block: 6px;
+  }
+  .app-header__nav a::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: var(--white);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform .35s var(--ease);
+  }
+  .app-header__nav a:hover { color: var(--white); }
+  .app-header__nav a:hover::after { transform: scaleX(1); }
+  .app-header__right { justify-self: end; display: flex; align-items: center; gap: 16px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover { background: var(--white); color: var(--charcoal); border-color: var(--white); }
+  .theme-mint-light .btn:hover, .theme-white .btn:hover { background: var(--charcoal); color: var(--white); border-color: var(--charcoal); }
+  .btn-small { padding: 10px 18px; font-size: 13px; }
+  .btn-solid { background: var(--white); color: var(--charcoal); border-color: var(--white); }
+  .btn-solid:hover { background: var(--evergreen); color: var(--white); border-color: var(--evergreen); }
+  .theme-mint-light .btn-solid { background: var(--evergreen); color: var(--white); border-color: var(--evergreen); }
+  .theme-mint-light .btn-solid:hover { background: var(--charcoal); border-color: var(--charcoal); }
+
+  /* === HERO === */
+  .hero {
+    background: var(--charcoal);
+    color: var(--white);
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(56px, 7vw, 96px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: clamp(36px, 4vw, 56px);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .hero__topline .left {
+    color: var(--mint-light);
+  }
+  .hero__topline .right {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255,255,255,0.7);
+    font-size: 16px;
+  }
+  .hero h1 {
+    color: var(--white);
+    max-width: 14ch;
+    margin-bottom: clamp(24px, 3vw, 36px);
+  }
+  .hero h1 i { color: var(--mint-light); }
+  .hero__sub {
+    max-width: 56ch;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: clamp(36px, 4vw, 48px);
+  }
+  .hero__byline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.02em;
+    margin-bottom: clamp(32px, 4vw, 48px);
+    flex-wrap: wrap;
+  }
+  .hero__byline strong { color: var(--white); font-weight: 500; }
+  .hero__byline .dot {
+    width: 3px; height: 3px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50%;
+  }
+
+  /* Video frame */
+  .video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0a0a0a;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.5);
+  }
+  .video-frame__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(29,58,49,0.7), transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(199,212,196,0.15), transparent 55%),
+      linear-gradient(135deg, #1d1f1e, #0e1110);
+    cursor: pointer;
+    transition: transform .5s var(--ease);
+  }
+  .video-frame__placeholder:hover .play-btn { transform: scale(1.08); background: var(--mint-light); }
+  .video-frame__grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .play-btn {
+    width: clamp(68px, 8vw, 96px);
+    height: clamp(68px, 8vw, 96px);
+    border-radius: 50%;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .35s var(--ease), background .35s var(--ease);
+    position: relative;
+    z-index: 2;
+  }
+  .play-btn svg { fill: var(--charcoal); margin-left: 4px; }
+  .video-frame__duration {
+    color: var(--white);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+    opacity: 0.7;
+  }
+
+  /* Download row */
+  .download-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: clamp(22px, 3vw, 32px);
+  }
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .dl-btn:hover {
+    background: var(--white);
+    color: var(--charcoal);
+    border-color: var(--white);
+  }
+  .dl-btn svg { transition: transform .3s var(--ease); }
+  .dl-btn:hover svg { transform: translateY(2px); }
+  .dl-btn .file-meta {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-left: 2px;
+  }
+
+  /* === BLADE LAYOUT (POP uses content-blade with theme + padding modifiers) === */
+  .content-blade {
+    padding-block: clamp(64px, 9vw, 140px);
+    position: relative;
+  }
+  .content-blade.padding-top-medium    { padding-top: clamp(56px, 7vw, 100px); }
+  .content-blade.padding-bottom-medium { padding-bottom: clamp(56px, 7vw, 100px); }
+
+  /* Two-column-offset (POP's signature blade layout: small left label, wide right body) */
+  .two-column-offset {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+  }
+  .two-column-offset--body { max-width: 56ch; }
+  .two-column-offset--body h2 i { color: inherit; opacity: 0.65; }
+  .two-column-offset--body p {
+    margin-top: 24px;
+    font-size: clamp(17px, 1.2vw, 19px);
+    line-height: 1.6;
+  }
+  .two-column-offset--body p + p { margin-top: 16px; }
+  .theme-charcoal .two-column-offset--body p,
+  .theme-evergreen .two-column-offset--body p {
+    color: rgba(255,255,255,0.8);
+  }
+  .theme-charcoal .two-column-offset--body h2 i,
+  .theme-evergreen .two-column-offset--body h2 i { color: var(--mint-light); opacity: 1; }
+  .theme-mint-light .two-column-offset--body h2 i { color: rgba(29,31,30,0.55); }
+  .theme-white .two-column-offset--body h2 i { color: rgba(29,31,30,0.55); }
+
+  @media (max-width: 900px) {
+    .two-column-offset { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  /* === INTRO LEDE BLADE === */
+  .intro-blade { background: var(--charcoal); color: var(--white); }
+  .intro-blade .rich-text-blade {
+    max-width: 36em;
+  }
+  .intro-blade .rich-text-blade p {
+    font-size: clamp(22px, 2.2vw, 32px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--white);
+    font-weight: 400;
+  }
+  .intro-blade .rich-text-blade p + p { margin-top: 20px; }
+  .intro-blade .rich-text-blade i,
+  .intro-blade .rich-text-blade em {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--mint-light);
+    letter-spacing: -0.01em;
+  }
+
+  /* === SECTION (article-style, uses POP's two-column-offset feel) === */
+  .article-section {
+    padding-block: clamp(56px, 7vw, 100px);
+    border-top: 1px solid var(--line-current);
+  }
+  .article-section:first-of-type { border-top: 0; }
+
+  .article-section__head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+    margin-bottom: clamp(32px, 4vw, 48px);
+  }
+  .article-section__eyebrow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .article-section__num {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(40px, 4.5vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+  .article-section__label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    opacity: 0.7;
+  }
+  .article-section__title {
+    max-width: 22ch;
+  }
+  .article-section__title i { font-weight: 400; }
+
+  .article-section__body {
+    max-width: 56ch;
+    margin-left: 0;
+  }
+  .article-section__lede {
+    font-size: clamp(19px, 1.5vw, 24px);
+    line-height: 1.4;
+    margin-bottom: 24px;
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+  .article-section__prose p {
+    font-size: clamp(17px, 1.15vw, 19px);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .article-section__prose p:last-child { margin-bottom: 0; }
+  .article-section__prose strong { font-weight: 500; }
+
+  /* On dark theme, soften prose */
+  .theme-charcoal .article-section__prose p,
+  .theme-evergreen .article-section__prose p {
+    color: rgba(255,255,255,0.82);
+  }
+  .theme-charcoal .article-section__prose strong,
+  .theme-evergreen .article-section__prose strong {
+    color: var(--white);
+  }
+  .theme-charcoal .article-section__lede,
+  .theme-evergreen .article-section__lede {
+    color: var(--mint-light);
+  }
+
+  /* On light theme */
+  .theme-mint-light .article-section__lede,
+  .theme-white .article-section__lede { color: var(--evergreen); }
+
+  /* Compact takeaway list (POP's underline-list-big aesthetic but condensed) */
+  .takeaways-block {
+    margin-top: clamp(28px, 3vw, 40px);
+    padding-top: clamp(24px, 3vw, 32px);
+    border-top: 1px solid var(--line-current);
+  }
+  .takeaways-block__title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+  .takeaways-block ol {
+    display: grid;
+    gap: 0;
+  }
+  .takeaways-block ol li {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--line-current);
+    font-size: clamp(16px, 1.15vw, 18px);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+  .takeaways-block ol li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .takeaways-block .num {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .takeaways-block strong { font-weight: 500; }
+
+  @media (max-width: 900px) {
+    .article-section__head { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* Stat row */
+  .stats-inline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: clamp(28px, 3vw, 36px) 0;
+    padding: clamp(20px, 2.5vw, 28px) 0;
+    border-top: 1px solid var(--line-current);
+    border-bottom: 1px solid var(--line-current);
+  }
+  .stat-inline__num {
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+  .stat-inline__num i {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.55em;
+    opacity: 0.7;
+    margin-left: 4px;
+  }
+  .stat-inline__label {
+    margin-top: 8px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    opacity: 0.65;
+    line-height: 1.4;
+  }
+  @media (max-width: 700px) {
+    .stats-inline { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* === HOW POP CAN HELP === */
+  .help-blade {
+    background: var(--mint-light);
+    color: var(--charcoal);
+    padding-block: clamp(72px, 9vw, 140px);
+  }
+  .help-blade .label-small { color: var(--evergreen); }
+  .help-blade h2 i { color: var(--evergreen); }
+  .help-blade__lede {
+    margin-top: 28px;
+    font-size: clamp(18px, 1.3vw, 21px);
+    line-height: 1.55;
+    color: rgba(29,31,30,0.78);
+    max-width: 52ch;
+  }
+
+  .engagement-list {
+    margin-top: clamp(36px, 4vw, 56px);
+    border-top: 1px solid var(--line-mint);
+  }
+  .engagement {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(20px, 3vw, 60px);
+    align-items: start;
+    padding-block: clamp(20px, 2.5vw, 32px);
+    border-bottom: 1px solid var(--line-mint);
+    transition: padding-left .4s var(--ease);
+  }
+  .engagement:hover { padding-left: 12px; }
+  .engagement strong {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2vw, 30px);
+    letter-spacing: -0.02em;
+    color: var(--evergreen);
+    line-height: 1.15;
+    display: block;
+  }
+  .engagement p {
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.55;
+    color: rgba(29,31,30,0.78);
+  }
+
+  .launchpad-note {
+    margin-top: clamp(36px, 4vw, 48px);
+    padding: clamp(24px, 3vw, 36px);
+    border: 1px solid var(--evergreen);
+    border-radius: 4px;
+    background: rgba(29,58,49,0.04);
+  }
+  .launchpad-note strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--evergreen);
+  }
+  .launchpad-note p {
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.55;
+    color: rgba(29,31,30,0.82);
+  }
+
+  @media (max-width: 800px) {
+    .engagement { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* === CTA / FOOTER-CALL === */
+  .cta-blade {
+    background: var(--evergreen);
+    color: var(--white);
+    padding-block: clamp(72px, 9vw, 140px);
+  }
+  .cta-blade__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 5vw, 80px);
+    align-items: end;
+  }
+  .cta-blade h2 {
+    color: var(--white);
+    font-size: clamp(40px, 5.4vw, 80px);
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+  }
+  .cta-blade h2 i { color: var(--mint-light); }
+  .cta-blade .label-small { color: var(--mint-light); margin-bottom: 24px; }
+
+  .cta-contact {
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 24px;
+  }
+  .cta-contact .name {
+    font-weight: 500;
+    font-size: clamp(18px, 1.4vw, 22px);
+    margin-bottom: 4px;
+    color: var(--white);
+  }
+  .cta-contact .role {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 14px;
+  }
+  .cta-contact a {
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 2px;
+    font-size: clamp(14px, 1vw, 16px);
+    transition: border-color .3s var(--ease);
+  }
+  .cta-contact a:hover { border-color: var(--white); }
+
+  .cta-blade__lede {
+    margin-bottom: 24px;
+    color: rgba(255,255,255,0.82);
+    font-size: clamp(17px, 1.2vw, 19px);
+  }
+
+  @media (max-width: 800px) {
+    .cta-blade__inner { grid-template-columns: 1fr; }
+  }
+
+  /* === FOOTER (mirrors POP exactly) === */
+  .app-footer {
+    background: var(--charcoal);
+    color: var(--white);
+    padding-block: clamp(64px, 8vw, 120px) 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .app-footer__eyebrow {
+    color: var(--mint-light);
+    margin-bottom: 28px;
+  }
+  .app-footer h3 {
+    font-size: clamp(40px, 5vw, 80px);
+    color: var(--white);
+    max-width: 14ch;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+  .app-footer h3 i {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--mint-light);
+  }
+  .app-footer h4 {
+    margin-top: 32px;
+    font-size: clamp(20px, 1.5vw, 26px);
+    line-height: 1.4;
+    color: rgba(255,255,255,0.82);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .app-footer h4 a {
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 2px;
+    transition: border-color .3s var(--ease);
+  }
+  .app-footer h4 a:hover { border-color: var(--white); }
+
+  .app-footer__bottom {
+    margin-top: clamp(60px, 8vw, 120px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .app-footer__nav {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.78);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    padding-bottom: 3px;
+    line-height: 1;
+    transition: color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .arrow-link::after {
+    content: "→";
+    transition: transform .3s var(--ease);
+  }
+  .arrow-link:hover { color: var(--white); border-color: var(--white); }
+  .arrow-link:hover::after { transform: translateX(4px); }
+
+  .social-links { display: flex; gap: 12px; margin-right: 16px; }
+  .social-link {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .social-link:hover { background: var(--white); color: var(--charcoal); border-color: var(--white); }
+
+  .app-footer__copyright {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    text-align: right;
+    letter-spacing: 0;
+  }
+  .app-footer__copyright a {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 1px;
+  }
+
+  @media (max-width: 700px) {
+    .app-footer__bottom { grid-template-columns: 1fr; }
+    .app-footer__copyright { text-align: left; }
+  }
+
+  /* === SCROLL ANIMATIONS (POP's fade-in slide-up) === */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s var(--ease), transform .8s var(--ease);
+    will-change: opacity, transform;
+  }
+  .scroll-animate.is-in,
+  .scroll-animate.fade-in.slide-up.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === MOBILE === */
+  @media (max-width: 880px) {
+    .app-header__nav { display: none; }
+    .app-header__row { grid-template-columns: 1fr auto; }
+    .signals-eyebrow { display: none; }
+  }
+</style>
+</head>
+
+<body class="theme-white">
+
+<!-- === HEADER === -->
+<div class="app-header-spacer"></div>
+<header class="app-header" id="appHeader">
+  <div class="container">
+    <div class="app-header__row">
+      <a href="https://www.wearepop.com/" target="_blank" rel="noopener noreferrer" class="pop-logo-link" aria-label="POP home">
+        <span class="pop-logo">POP</span>
+        <span class="signals-eyebrow">Signals<span>Episode 01 · 05.11.26</span></span>
+      </a>
+      <nav class="app-header__nav" aria-label="Primary">
+        <a href="https://www.wearepop.com/work" target="_blank" rel="noopener noreferrer">Work</a>
+        <a href="https://www.wearepop.com/about" target="_blank" rel="noopener noreferrer">About</a>
+        <a href="https://www.wearepop.com/careers" target="_blank" rel="noopener noreferrer">Careers</a>
+      </nav>
+      <div class="app-header__right">
+        <a href="mailto:chris.dressler@wearepop.com" class="btn btn-small">Let's talk</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- === HERO + VIDEO === -->
+<section class="hero theme-charcoal">
+  <div class="container">
+    <div class="hero__topline">
+      <span class="left">POP Signals · Episode 01</span>
+      <span class="right">05.11.2026</span>
+    </div>
+
+    <h1 class="h-display">Adobe Summit <i>2026</i> Takeaways.</h1>
+
+    <p class="hero__sub lede">
+      What Adobe announced at Summit and what it means for your stack strategy. A short briefing with the
+      highlights, plus a quick read on each theme below.
+    </p>
+
+    <div class="hero__byline">
+      <strong>Chris Dressler</strong><span class="dot"></span><span>Chief Digital Officer, POP</span><span class="dot"></span><span>12 min watch · 6 min read</span>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="video-frame" id="videoFrame">
+      <video id="briefingVideo" controls preload="metadata" playsinline style="width:100%;height:100%;object-fit:cover;background:#0a0a0a;">
+        <source src="https://onwdiipbieedq94m.public.blob.vercel-storage.com/signals/pop-chris-long.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- DOWNLOADS -->
+    <div class="download-row">
+      <a href="https://onwdiipbieedq94m.public.blob.vercel-storage.com/signals/pop-chris-short.mp4" class="dl-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        Watch the short version
+        <span class="file-meta">MP4</span>
+      </a>
+      <a href="https://onwdiipbieedq94m.public.blob.vercel-storage.com/signals/pop-chris-transcript.txt" download class="dl-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        Download the Transcript
+        <span class="file-meta">TXT</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- === INTRO LEDE (POP rich-text-blade style) === -->
+<section class="content-blade theme-charcoal" style="padding-top: 0; padding-bottom: clamp(56px, 7vw, 100px);">
+  <div class="container">
+    <div class="rich-text-blade scroll-animate">
+      <p>
+        Summit didn't disappoint this year. Big bets on AI as expected, a clearer
+        <i>agentic posture</i>, and a portfolio-wide MCP push that's quietly the most consequential
+        story of the week.
+      </p>
+      <p>
+        Here are the five themes that stood out — and what to <i>do</i> about each.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- === 01. THE BIG PICTURE === -->
+<section class="content-blade theme-evergreen">
+  <div class="container">
+    <div class="article-section scroll-animate" style="border-top: 0; padding-top: 0;">
+      <div class="article-section__head">
+        <div class="article-section__eyebrow">
+          <span class="article-section__num">01</span>
+          <span class="article-section__label">The big picture</span>
+        </div>
+        <h2 class="h2 article-section__title">Adobe is the <i>orchestration layer</i>, not the foundation model.</h2>
+      </div>
+
+      <div class="article-section__body">
+        <p class="article-section__lede">
+          Adobe crystallized its AI strategy at Summit. They aren't building frontier models—they're orchestrating them.
+        </p>
+        <div class="article-section__prose">
+          <p>
+            The expanded partner list now spans <strong>AWS, Anthropic, Google Cloud, IBM, Microsoft, NVIDIA, and OpenAI</strong>—with everything riding on open standards (MCP and agent-to-agent). The Experience Cloud rebrand to <strong>CX Enterprise</strong> signals the bigger shift: it's not a stack of point products anymore, it's an orchestration platform that runs agents across the customer lifecycle.
+          </p>
+        </div>
+
+        <div class="takeaways-block">
+          <div class="takeaways-block__title">Key takeaways</div>
+          <ol>
+            <li><span class="num">01</span><span><strong>Think orchestration, not point tools.</strong> Treat CX Enterprise as the connective tissue across your existing Adobe investments.</span></li>
+            <li><span class="num">02</span><span><strong>Keep LLM flexibility on purpose.</strong> You don't have to commit to one vendor—confirm the LLMs you trust fit cleanly through MCP and A2A.</span></li>
+            <li><span class="num">03</span><span><strong>Make MCP and A2A non-negotiable for new buys.</strong> Most stacks need a light retrofit to be ready.</span></li>
+            <li><span class="num">04</span><span><strong>Set up an early proof point.</strong> Audience-to-activation is a good starting place.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === 02. AGENTIC CX === -->
+<section class="content-blade theme-charcoal">
+  <div class="container">
+    <div class="article-section scroll-animate" style="border-top: 0; padding-top: 0;">
+      <div class="article-section__head">
+        <div class="article-section__eyebrow">
+          <span class="article-section__num">02</span>
+          <span class="article-section__label">Agentic CX</span>
+        </div>
+        <h2 class="h2 article-section__title">CX Enterprise &amp; Co-worker: set a goal, approve a plan, <i>watch agents execute.</i></h2>
+      </div>
+
+      <div class="article-section__body">
+        <p class="article-section__lede">
+          The headline product at Summit. A conversational interface that orchestrates content, audiences, channels, and measurement end-to-end.
+        </p>
+        <div class="article-section__prose">
+          <p>
+            Give it a prompt like <i>"lift cross-sell by 3% in my outdoor wear category,"</i> and it assembles audiences, pulls the most aligned creative, drafts offers, and recommends channels. A human approves the plan, then agents execute against it. It's built on Engagement Intelligence, Journey Optimizer, CX Analytics, and the real-time CDP. The biggest shift: <strong>non-technical users can describe an outcome and have the platform orchestrate it.</strong>
+          </p>
+        </div>
+
+        <div class="takeaways-block">
+          <div class="takeaways-block__title">Key takeaways</div>
+          <ol>
+            <li><span class="num">01</span><span><strong>GA is months, not weeks.</strong> Use the runway to prepare, not to wait.</span></li>
+            <li><span class="num">02</span><span><strong>Pick low-risk jobs first.</strong> Cross-sell, win-back, loyalty, audience expansion. High-stakes creative stays human-led for now.</span></li>
+            <li><span class="num">03</span><span><strong>Rewire the operating model in parallel.</strong> Who approves agent-drafted plans, who owns measurement, where humans stay in the loop.</span></li>
+            <li><span class="num">04</span><span><strong>Audit data and system readiness early.</strong> Coworker needs structured, connected data.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === 03. CONTENT AUTHORITY === -->
+<section class="content-blade theme-mint-light">
+  <div class="container">
+    <div class="article-section scroll-animate" style="border-top: 0; padding-top: 0;">
+      <div class="article-section__head">
+        <div class="article-section__eyebrow">
+          <span class="article-section__num">03</span>
+          <span class="article-section__label">Content authority &amp; LLM optimization</span>
+        </div>
+        <h2 class="h2 article-section__title">Your next biggest channel doesn't <i>click</i>, it <i>cites.</i></h2>
+      </div>
+
+      <div class="article-section__body">
+        <p class="article-section__lede">
+          Adobe now sees brand visibility inside LLMs as its own discipline—and they have two products carrying the load.
+        </p>
+        <div class="article-section__prose">
+          <p>
+            <strong>LLM Optimizer</strong> tracks how often your brand shows up across Claude, ChatGPT, Gemini, and Perplexity—measuring visibility score, share of voice, and sentiment. Its opportunities dashboard flags missing summaries, schema gaps, and crawlability issues, then deploys fixes either back to AEM or at the CDN edge (serving optimized HTML to AI agents without touching what humans or SEO bots see). <strong>Brand Intelligence</strong> sits on top of AEM as a continuously learning context layer that keeps agent-generated content on-brand.
+          </p>
+        </div>
+
+        <div class="stats-inline">
+          <div>
+            <div class="stat-inline__num">269<i>% YoY</i></div>
+            <div class="stat-inline__label">AI traffic to US retail sites, March 2026</div>
+          </div>
+          <div>
+            <div class="stat-inline__num">3,500<i>%</i></div>
+            <div class="stat-inline__label">LLM traffic growth, mid-2024 to mid-2025</div>
+          </div>
+          <div>
+            <div class="stat-inline__num">7<i>partners</i></div>
+            <div class="stat-inline__label">AWS · Anthropic · Google · IBM · MSFT · NVIDIA · OpenAI</div>
+          </div>
+        </div>
+
+        <div class="article-section__prose">
+          <p>The slope is real. If you're not already on this, it's the channel to stand up next.</p>
+        </div>
+
+        <div class="takeaways-block">
+          <div class="takeaways-block__title">Key takeaways</div>
+          <ol>
+            <li><span class="num">01</span><span><strong>Treat GEO like a real channel.</strong> Resource it the way you'd have resourced SEO five years ago.</span></li>
+            <li><span class="num">02</span><span><strong>Run an LLM visibility audit first.</strong> Find gaps, factual errors, and structured-data holes before turning anything on.</span></li>
+            <li><span class="num">03</span><span><strong>Use AEM as your brand context layer.</strong> Governed, machine-readable content is how you stay visible to agents.</span></li>
+            <li><span class="num">04</span><span><strong>Approach owned, earned, and social differently.</strong> Owned needs structure. Earned needs the outlets LLMs over-index on. Social needs authoritative engagement.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === 04. AEM GUIDES === -->
+<section class="content-blade theme-evergreen">
+  <div class="container">
+    <div class="article-section scroll-animate" style="border-top: 0; padding-top: 0;">
+      <div class="article-section__head">
+        <div class="article-section__eyebrow">
+          <span class="article-section__num">04</span>
+          <span class="article-section__label">AEM Guides update</span>
+        </div>
+        <h2 class="h2 article-section__title">Structured content for the <i>LLM era.</i></h2>
+      </div>
+
+      <div class="article-section__body">
+        <p class="article-section__lede">
+          Under-the-radar at Summit, but arguably the most LLM-ready content platform Adobe already ships.
+        </p>
+        <div class="article-section__prose">
+          <p>
+            Two big updates. First, a new <strong>MCP server for AEM Guides</strong>—writers and engineers can interact with topics, maps, branches, and publishing workflows from inside Claude, ChatGPT, Cursor, or Copilot. Second, <strong>Editor 2.0</strong>, a fully modernized authoring experience that looks like Microsoft Word and removes the need to wrangle raw DITA XML, with AI tooling sprinkled in.
+          </p>
+          <p>
+            The bigger point: LLMs do their best work when inputs are structured, semantic, and trustworthy. That's literally what AEM Guides delivers—single-sourced atomic topics, semantic markup, and governed workflows. In the same Summit where Adobe pushed LLM Optimizer and AEM-as-context-layer, Guides quietly became the connective tissue.
+          </p>
+        </div>
+
+        <div class="takeaways-block">
+          <div class="takeaways-block__title">Key takeaways</div>
+          <ol>
+            <li><span class="num">01</span><span><strong>Get Editor 2.0 / MCP in front of your teams.</strong> Productivity and AI-assisted drafting both improve once authors are out of raw-XML mode.</span></li>
+            <li><span class="num">02</span><span><strong>Use LLM discoverability to justify the investment.</strong> "Agents need structured content" is the cleanest funding argument you'll have this year.</span></li>
+            <li><span class="num">03</span><span><strong>Migrate content out of unstructured systems.</strong> Word, SharePoint, and homegrown wikis won't survive the agentic era.</span></li>
+            <li><span class="num">04</span><span><strong>De-risk the DITA learning curve.</strong> Migration anxiety is the most common reason teams delay.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === 05. MCPs EVERYWHERE === -->
+<section class="content-blade theme-charcoal">
+  <div class="container">
+    <div class="article-section scroll-animate" style="border-top: 0; padding-top: 0;">
+      <div class="article-section__head">
+        <div class="article-section__eyebrow">
+          <span class="article-section__num">05</span>
+          <span class="article-section__label">MCPs everywhere</span>
+        </div>
+        <h2 class="h2 article-section__title">Adobe just made it dramatically faster to build <i>with</i> and <i>on top of</i> its products.</h2>
+      </div>
+
+      <div class="article-section__body">
+        <p class="article-section__lede">
+          One of the most undercover themes at Summit—and one of the most consequential for delivery teams.
+        </p>
+        <div class="article-section__prose">
+          <p>
+            <strong>For engineering</strong>: AEM now ships MCP servers covering content (read/write) and Cloud Manager. Engineers describe code changes or components in natural language to their agent of choice; scaffolding that used to take hours happens in minutes.
+          </p>
+          <p>
+            <strong>For marketers</strong>: The Adobe Marketing Agent is GA in Microsoft 365 Copilot and in beta in Claude Enterprise, ChatGPT Enterprise, and Gemini Enterprise. Pull Adobe data and trigger workflows from inside tools your teams already use.
+          </p>
+          <p>
+            <strong>For content ops</strong>: Workfront added a Workflow Optimization Agent. GenStudio for Performance Marketing added support for ChatGPT Ads.
+          </p>
+        </div>
+
+        <div class="takeaways-block">
+          <div class="takeaways-block__title">Key takeaways</div>
+          <ol>
+            <li><span class="num">01</span><span><strong>Pilot AEM MCP with one engineering pod.</strong> Measure cycle-time on a real backlog. The reaction drives adoption faster than any slide.</span></li>
+            <li><span class="num">02</span><span><strong>Bring Adobe data into tools your teams already use.</strong> Less context-switching, more done.</span></li>
+            <li><span class="num">03</span><span><strong>Audit custom integrations for MCP/A2A readiness.</strong> Anything custom-built can likely be simplified or replaced.</span></li>
+            <li><span class="num">04</span><span><strong>Plan for MCP across the portfolio.</strong> This is just the start—Adobe is rolling MCP into more products over the coming year.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === HOW POP CAN HELP === -->
+<section class="help-blade">
+  <div class="container">
+    <div class="two-column-offset scroll-animate">
+      <div>
+        <div class="label-small has-bar">How POP can help</div>
+      </div>
+      <div class="two-column-offset--body">
+        <h2 class="h2">We turn Adobe announcements into <i>shipped, measurable work.</i></h2>
+        <p class="help-blade__lede">
+          Across AEM, AEM Guides, Customer Journey Analytics, Journey Optimizer, Real-time CDP, Target, Workfront, and the broader CX Enterprise stack. For Summit 2026's themes specifically, we're already running:
+        </p>
+
+        <div class="engagement-list">
+          <div class="engagement">
+            <strong>Agentic CX readiness</strong>
+            <p>Operating-model design, use-case prioritization, and pilot setup for CX Enterprise and Coworker.</p>
+          </div>
+          <div class="engagement">
+            <strong>LLM visibility &amp; content authority</strong>
+            <p>Practical GEO assessments and AEM-as-context-layer roadmaps.</p>
+          </div>
+          <div class="engagement">
+            <strong>AEM MCP enablement</strong>
+            <p>Sandbox setup, engineer onboarding, and cycle-time benchmarking.</p>
+          </div>
+          <div class="engagement">
+            <strong>AEM Guides modernization</strong>
+            <p>DITA migrations, Editor 2.0 rollouts, and structuring content so it's discoverable by LLMs.</p>
+          </div>
+          <div class="engagement">
+            <strong>Closed-loop journey programs</strong>
+            <p>Designing the audience, content, activation, and measurement loop in AJO, RT-CDP, and CX Analytics.</p>
+          </div>
+        </div>
+
+        <div class="launchpad-note">
+          <strong>POP Launchpad</strong>
+          <p>Most engagements start with a Launchpad accelerator—pre-built blueprints, reference architectures, prompt libraries, and starter kits that compress the blank-page problem from months to weeks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === CTA === -->
+<section class="cta-blade">
+  <div class="container">
+    <div class="cta-blade__inner scroll-animate">
+      <div>
+        <div class="label-small has-bar">Ready to chat?</div>
+        <h2 class="h2" style="margin-top: 20px;">Let's turn Summit 2026 into <i>shipped work.</i></h2>
+      </div>
+      <div>
+        <p class="cta-blade__lede">
+          Reach out and we'll set up a working session—category audit, opportunity map, and a point of view on where to start.
+        </p>
+
+        <div class="cta-contact">
+          <div class="name">Chris Dressler</div>
+          <div class="role">Chief Digital Officer, POP</div>
+          <a href="mailto:chris.dressler@wearepop.com">chris.dressler@wearepop.com</a>
+        </div>
+
+        <a href="mailto:chris.dressler@wearepop.com?subject=POP%20Signals%20%E2%80%94%20Adobe%20Summit%202026%20Follow-up" class="btn btn-solid">Start a conversation →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- === FOOTER (mirrors POP's exactly) === -->
+<footer class="app-footer">
+  <div class="container">
+    <div class="app-footer__eyebrow label-small has-bar">Contact us</div>
+    <h3>Got anything that needs <i>POP?</i></h3>
+    <h4 class="h7">Let's connect. Send us an email.<br>
+      <a href="mailto:workwithus@wearepop.com">workwithus@wearepop.com</a>
+    </h4>
+
+    <div class="app-footer__bottom">
+      <nav class="app-footer__nav">
+        <div class="social-links">
+          <a href="https://www.instagram.com/pop_agency" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/pop" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.04 0 4.78 2.66 4.78 6.13V21h-4v-5.3c0-1.27-.02-2.9-1.77-2.9-1.78 0-2.05 1.4-2.05 2.82V21h-4z"/>
+            </svg>
+          </a>
+        </div>
+        <a href="https://www.wearepop.com/work" target="_blank" rel="noopener noreferrer" class="arrow-link">Explore our work</a>
+        <a href="https://www.wearepop.com/about" target="_blank" rel="noopener noreferrer" class="arrow-link">Read about us</a>
+        <a href="https://www.wearepop.com/careers" target="_blank" rel="noopener noreferrer" class="arrow-link">Join our team</a>
+      </nav>
+      <div class="app-footer__copyright">
+        <p>© 2026, POP Inc. All rights reserved. &nbsp;|&nbsp; <a href="https://www.wearepop.com/legal-terms" target="_blank" rel="noopener noreferrer">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.wearepop.com/legal-terms" target="_blank" rel="noopener noreferrer">Your California Privacy Rights</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Pin/unpin header on scroll
+  (function () {
+    const header = document.getElementById('appHeader');
+    let lastY = window.scrollY;
+    let ticking = false;
+    function update() {
+      const y = window.scrollY;
+      if (y > 80 && y > lastY) header.classList.add('is-hidden');
+      else header.classList.remove('is-hidden');
+      lastY = y;
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+  })();
+
+  // Scroll-triggered fade-up (mirrors POP's fade-in slide-up animated class)
+  (function () {
+    const items = document.querySelectorAll('.scroll-animate');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('is-in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(el => io.observe(el));
+  })();
+
+</script>
+</body>
+</html>
