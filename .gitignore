@@ -5,3 +5,6 @@
 # Source assets hosted on Vercel Blob — not deployed via the repo
 signals/*.mp4
 signals/POP_Chris Transcript.txt
+
+# POP Brand Kit reference (source OTF/PDF) — deployed copies live in signals/assets/
+POP Brand Kit/

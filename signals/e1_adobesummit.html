@@ -16,11 +16,37 @@
   });
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://use.typekit.net" crossorigin />
-<link rel="stylesheet" href="https://use.typekit.net/ofi6lnb.css" />
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet" />
+<style>
+  /* === POP BRAND FONTS (self-hosted from official POP Brand Kit) === */
+  @font-face {
+    font-family: 'Articulat CF';
+    src: url('./assets/fonts/articulatcf-medium.woff2') format('woff2');
+    font-weight: 400 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Articulat CF';
+    src: url('./assets/fonts/articulatcf-demibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Articulat CF';
+    src: url('./assets/fonts/articulatcf-bold.woff2') format('woff2');
+    font-weight: 700 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Larken';
+    src: url('./assets/fonts/larken-mediumitalic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+  }
+</style>
 
 <style>
   /* === POP PALETTE (exact tokens from wearepop.com design system) === */
@@ -41,8 +67,8 @@
     --line-dark:       rgba(34,34,34,0.14);
     --line-mint:       rgba(15,59,58,0.22);
 
-    --font:    "articulat-cf", "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
-    --font-italic: "larken", "Fraunces", serif;
+    --font:    "Articulat CF", -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-italic: "Larken", Georgia, serif;
     --container: 1280px;
     --container-narrow: 1040px;
     --pad-x: clamp(20px, 4vw, 64px);
@@ -150,11 +176,9 @@
     gap: 14px;
   }
   .pop-logo {
-    font-weight: 800;
-    font-size: 26px;
-    letter-spacing: -0.05em;
-    line-height: 1;
-    color: var(--white);
+    height: 26px;
+    width: auto;
+    display: block;
   }
   .signals-eyebrow {
     font-size: 11px;
@@ -851,7 +875,7 @@
   <div class="container">
     <div class="app-header__row">
       <a href="https://www.wearepop.com/" target="_blank" rel="noopener noreferrer" class="pop-logo-link" aria-label="POP home">
-        <span class="pop-logo">POP</span>
+        <img class="pop-logo" src="./assets/logos/pop-logo-white.svg" alt="POP" />
         <span class="signals-eyebrow">Signals<span>Episode 01 · 05.11.26</span></span>
       </a>
       <nav class="app-header__nav" aria-label="Primary">
