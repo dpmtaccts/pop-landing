@@ -18,27 +18,31 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://use.typekit.net" crossorigin />
+<link rel="stylesheet" href="https://use.typekit.net/ofi6lnb.css" />
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet" />
 
 <style>
-  /* === POP PALETTE (matches their site themes) === */
+  /* === POP PALETTE (exact tokens from wearepop.com design system) === */
   :root {
-    --charcoal:        #1d1f1e;
-    --charcoal-2:      #25282a;
-    --evergreen:       #1d3a31;
-    --evergreen-deep:  #142822;
-    --mint-light:      #c7d4c4;
-    --mint-text:       #1d3a31;
+    --charcoal:        #222222;
+    --charcoal-2:      #2b2e30;
+    --evergreen:       #0f3b3a;
+    --evergreen-deep:  #0a2826;
+    --mint:            #5ee8bb;
+    --mint-light:      #bdf5e2;
+    --mint-text:       #0f3b3a;
     --white:           #ffffff;
-    --off-white:       #f4f4f0;
+    --canvas:          #faf9f4;
+    --off-white:       #faf9f4;
 
     --line:            rgba(255,255,255,0.16);
     --line-soft:       rgba(255,255,255,0.08);
-    --line-dark:       rgba(29,31,30,0.14);
-    --line-mint:       rgba(29,58,49,0.18);
+    --line-dark:       rgba(34,34,34,0.14);
+    --line-mint:       rgba(15,59,58,0.22);
 
-    --font:    "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
-    --font-italic: "Fraunces", "Geist", serif;
+    --font:    "articulat-cf", "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-italic: "larken", "Fraunces", serif;
     --container: 1280px;
     --container-narrow: 1040px;
     --pad-x: clamp(20px, 4vw, 64px);
@@ -49,7 +53,7 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--font);
-    background: var(--white);
+    background: var(--canvas);
     color: var(--charcoal);
     line-height: 1.6;
     font-weight: 400;
@@ -67,7 +71,7 @@
   .theme-charcoal    { background: var(--charcoal); color: var(--white); --line-current: var(--line); --accent: var(--mint-light); }
   .theme-evergreen   { background: var(--evergreen); color: var(--white); --line-current: var(--line); --accent: var(--mint-light); }
   .theme-mint-light  { background: var(--mint-light); color: var(--charcoal); --line-current: var(--line-mint); --accent: var(--evergreen); }
-  .theme-white       { background: var(--white); color: var(--charcoal); --line-current: var(--line-dark); --accent: var(--evergreen); }
+  .theme-white       { background: var(--canvas); color: var(--charcoal); --line-current: var(--line-dark); --accent: var(--evergreen); }
 
   /* === TYPOGRAPHY (POP uses italic <i> as the signature emphasis) === */
   h1, h2, h3, h4, h5, h6 {
@@ -493,14 +497,16 @@
   .theme-evergreen .article-section__prose strong {
     color: var(--white);
   }
+  /* Light theme first so dark-theme rules below win the cascade
+     (body has .theme-white, so without this ordering every lede
+     would inherit evergreen — invisible on theme-evergreen bg) */
+  .theme-mint-light .article-section__lede,
+  .theme-white .article-section__lede { color: var(--evergreen); }
+
   .theme-charcoal .article-section__lede,
   .theme-evergreen .article-section__lede {
     color: var(--mint-light);
   }
-
-  /* On light theme */
-  .theme-mint-light .article-section__lede,
-  .theme-white .article-section__lede { color: var(--evergreen); }
 
   /* Compact takeaway list (POP's underline-list-big aesthetic but condensed) */
   .takeaways-block {
