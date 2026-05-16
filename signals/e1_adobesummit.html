@@ -105,19 +105,19 @@
     letter-spacing: -0.028em;
     line-height: 1.04;
   }
-  h1 i, h2 i, h3 i, h4 i, h5 i, h6 i, p i {
+  h1 i, h2 i, h3 i, h4 i, h5 i, h6 i, p i, em {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: -0.015em;
   }
 
   /* POP-equivalent heading scale: h1–h7 */
-  .h-display { font-size: clamp(44px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.038em; font-weight: 500; }
-  .h1 { font-size: clamp(40px, 5.4vw, 80px); line-height: 1.0; letter-spacing: -0.035em; font-weight: 500; }
-  .h2 { font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; }
-  .h3 { font-size: clamp(26px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 500; }
-  .h4 { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; }
+  .h-display { font-size: clamp(44px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.038em; font-weight: 500; text-wrap: balance; }
+  .h1 { font-size: clamp(40px, 5.4vw, 80px); line-height: 1.0; letter-spacing: -0.035em; font-weight: 500; text-wrap: balance; }
+  .h2 { font-size: clamp(32px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; text-wrap: balance; }
+  .h3 { font-size: clamp(26px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 500; text-wrap: balance; }
+  .h4 { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; text-wrap: balance; }
   .h7 { font-size: clamp(18px, 1.5vw, 24px); line-height: 1.4; letter-spacing: -0.01em; font-weight: 400; }
 
   .label-small {
@@ -185,12 +185,12 @@
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--mint-light);
+    color: var(--white);
     padding-left: 14px;
     border-left: 1px solid rgba(255,255,255,0.18);
     line-height: 1.2;
   }
-  .signals-eyebrow span { display: block; color: rgba(255,255,255,0.55); font-size: 10px; margin-top: 2px; }
+  .signals-eyebrow span { display: block; color: var(--white); font-size: 10px; margin-top: 2px; }
 
   .app-header__nav {
     display: flex;
@@ -201,7 +201,7 @@
     font-size: 15px;
     font-weight: 400;
     letter-spacing: -0.01em;
-    color: rgba(255,255,255,0.78);
+    color: var(--white);
     transition: color .25s var(--ease);
     position: relative;
     padding-block: 6px;
@@ -263,32 +263,34 @@
     letter-spacing: 0.02em;
   }
   .hero__topline .left {
-    color: var(--mint-light);
+    color: var(--white);
   }
   .hero__topline .right {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
-    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    color: var(--white);
     font-size: 16px;
   }
   .hero h1 {
     color: var(--white);
     max-width: 14ch;
     margin-bottom: clamp(24px, 3vw, 36px);
+    text-wrap: balance;
   }
-  .hero h1 i { color: var(--mint-light); }
+  .hero h1 i { color: var(--white); }
   .hero__sub {
     max-width: 56ch;
-    color: rgba(255,255,255,0.78);
+    color: var(--white);
     margin-bottom: clamp(36px, 4vw, 48px);
+    text-wrap: pretty;
   }
   .hero__byline {
     display: flex;
     align-items: center;
     gap: 14px;
     font-size: 13px;
-    color: rgba(255,255,255,0.55);
+    color: var(--white);
     letter-spacing: 0.02em;
     margin-bottom: clamp(32px, 4vw, 48px);
     flex-wrap: wrap;
@@ -389,7 +391,6 @@
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    opacity: 0.5;
     margin-left: 2px;
   }
 
@@ -409,7 +410,7 @@
     align-items: start;
   }
   .two-column-offset--body { max-width: 56ch; }
-  .two-column-offset--body h2 i { color: inherit; opacity: 0.65; }
+  .two-column-offset--body h2 i { color: inherit; }
   .two-column-offset--body p {
     margin-top: 24px;
     font-size: clamp(17px, 1.2vw, 19px);
@@ -418,12 +419,12 @@
   .two-column-offset--body p + p { margin-top: 16px; }
   .theme-charcoal .two-column-offset--body p,
   .theme-evergreen .two-column-offset--body p {
-    color: rgba(255,255,255,0.8);
+    color: var(--white);
   }
   .theme-charcoal .two-column-offset--body h2 i,
-  .theme-evergreen .two-column-offset--body h2 i { color: var(--mint-light); opacity: 1; }
-  .theme-mint-light .two-column-offset--body h2 i { color: rgba(29,31,30,0.55); }
-  .theme-white .two-column-offset--body h2 i { color: rgba(29,31,30,0.55); }
+  .theme-evergreen .two-column-offset--body h2 i { color: var(--white); }
+  .theme-mint-light .two-column-offset--body h2 i { color: var(--charcoal); }
+  .theme-white .two-column-offset--body h2 i { color: var(--charcoal); }
 
   @media (max-width: 900px) {
     .two-column-offset { grid-template-columns: 1fr; gap: 24px; }
@@ -446,8 +447,8 @@
   .intro-blade .rich-text-blade em {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
-    color: var(--mint-light);
+    font-weight: 500;
+    color: var(--white);
     letter-spacing: -0.01em;
   }
 
@@ -455,28 +456,30 @@
   .article-section {
     padding-block: clamp(56px, 7vw, 100px);
     border-top: 1px solid var(--line-current);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
   }
   .article-section:first-of-type { border-top: 0; }
 
   .article-section__head {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: clamp(32px, 5vw, 80px);
-    align-items: start;
-    margin-bottom: clamp(32px, 4vw, 48px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2.5vw, 32px);
   }
   .article-section__eyebrow {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
   .article-section__num {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
-    font-size: clamp(40px, 4.5vw, 64px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+    font-weight: 500;
+    font-size: clamp(72px, 9vw, 128px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
   }
   .article-section__label {
     font-size: 11px;
@@ -484,12 +487,16 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     line-height: 1.4;
-    opacity: 0.7;
   }
   .article-section__title {
-    max-width: 22ch;
+    font-size: clamp(28px, 3.2vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.028em;
+    font-weight: 500;
+    max-width: 14ch;
+    text-wrap: balance;
   }
-  .article-section__title i { font-weight: 400; }
+  .article-section__title i { font-weight: 500; }
 
   .article-section__body {
     max-width: 56ch;
@@ -501,8 +508,9 @@
     margin-bottom: 24px;
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: -0.015em;
+    text-wrap: balance;
   }
   .article-section__prose p {
     font-size: clamp(17px, 1.15vw, 19px);
@@ -512,24 +520,20 @@
   .article-section__prose p:last-child { margin-bottom: 0; }
   .article-section__prose strong { font-weight: 500; }
 
-  /* On dark theme, soften prose */
   .theme-charcoal .article-section__prose p,
   .theme-evergreen .article-section__prose p {
-    color: rgba(255,255,255,0.82);
+    color: var(--white);
   }
   .theme-charcoal .article-section__prose strong,
   .theme-evergreen .article-section__prose strong {
     color: var(--white);
   }
-  /* Light theme first so dark-theme rules below win the cascade
-     (body has .theme-white, so without this ordering every lede
-     would inherit evergreen — invisible on theme-evergreen bg) */
   .theme-mint-light .article-section__lede,
-  .theme-white .article-section__lede { color: var(--evergreen); }
+  .theme-white .article-section__lede { color: var(--charcoal); }
 
   .theme-charcoal .article-section__lede,
   .theme-evergreen .article-section__lede {
-    color: var(--mint-light);
+    color: var(--white);
   }
 
   /* Compact takeaway list (POP's underline-list-big aesthetic but condensed) */
@@ -544,7 +548,6 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     margin-bottom: 20px;
-    opacity: 0.7;
   }
   .takeaways-block ol {
     display: grid;
@@ -565,15 +568,15 @@
   .takeaways-block .num {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 18px;
     line-height: 1;
-    opacity: 0.5;
   }
   .takeaways-block strong { font-weight: 500; }
 
   @media (max-width: 900px) {
-    .article-section__head { grid-template-columns: 1fr; gap: 16px; }
+    .article-section { grid-template-columns: 1fr; gap: 24px; }
+    .article-section__title { max-width: none; }
   }
 
   /* Stat row */
@@ -595,16 +598,14 @@
   .stat-inline__num i {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 0.55em;
-    opacity: 0.7;
     margin-left: 4px;
   }
   .stat-inline__label {
     margin-top: 8px;
     font-size: 12px;
     letter-spacing: 0.04em;
-    opacity: 0.65;
     line-height: 1.4;
   }
   @media (max-width: 700px) {
@@ -617,14 +618,15 @@
     color: var(--charcoal);
     padding-block: clamp(72px, 9vw, 140px);
   }
-  .help-blade .label-small { color: var(--evergreen); }
-  .help-blade h2 i { color: var(--evergreen); }
+  .help-blade .label-small { color: var(--charcoal); }
+  .help-blade h2 i { color: var(--charcoal); }
   .help-blade__lede {
     margin-top: 28px;
     font-size: clamp(18px, 1.3vw, 21px);
     line-height: 1.55;
-    color: rgba(29,31,30,0.78);
+    color: var(--charcoal);
     max-width: 52ch;
+    text-wrap: pretty;
   }
 
   .engagement-list {
@@ -644,25 +646,25 @@
   .engagement strong {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
     font-size: clamp(22px, 2vw, 30px);
     letter-spacing: -0.02em;
-    color: var(--evergreen);
+    color: var(--charcoal);
     line-height: 1.15;
     display: block;
   }
   .engagement p {
     font-size: clamp(15px, 1.1vw, 17px);
     line-height: 1.55;
-    color: rgba(29,31,30,0.78);
+    color: var(--charcoal);
   }
 
   .launchpad-note {
     margin-top: clamp(36px, 4vw, 48px);
     padding: clamp(24px, 3vw, 36px);
-    border: 1px solid var(--evergreen);
+    border: 1px solid var(--charcoal);
     border-radius: 4px;
-    background: rgba(29,58,49,0.04);
+    background: rgba(34,34,34,0.04);
   }
   .launchpad-note strong {
     display: block;
@@ -671,12 +673,12 @@
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--evergreen);
+    color: var(--charcoal);
   }
   .launchpad-note p {
     font-size: clamp(15px, 1.1vw, 17px);
     line-height: 1.55;
-    color: rgba(29,31,30,0.82);
+    color: var(--charcoal);
   }
 
   @media (max-width: 800px) {
@@ -700,9 +702,11 @@
     font-size: clamp(40px, 5.4vw, 80px);
     line-height: 1.0;
     letter-spacing: -0.035em;
+    text-wrap: balance;
+    max-width: 16ch;
   }
-  .cta-blade h2 i { color: var(--mint-light); }
-  .cta-blade .label-small { color: var(--mint-light); margin-bottom: 24px; }
+  .cta-blade h2 i { color: var(--white); }
+  .cta-blade .label-small { color: var(--white); margin-bottom: 24px; }
 
   .cta-contact {
     padding: 20px 0;
@@ -720,7 +724,7 @@
     font-size: 12px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: var(--white);
     margin-bottom: 14px;
   }
   .cta-contact a {
@@ -734,7 +738,7 @@
 
   .cta-blade__lede {
     margin-bottom: 24px;
-    color: rgba(255,255,255,0.82);
+    color: var(--white);
     font-size: clamp(17px, 1.2vw, 19px);
   }
 
@@ -750,8 +754,20 @@
     position: relative;
     overflow: hidden;
   }
+  /* TODO: footer background image from Casey (Slack) — drop file at ./assets/footer-bg.jpg to activate */
+  .app-footer__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  .app-footer > .container { position: relative; z-index: 1; }
   .app-footer__eyebrow {
-    color: var(--mint-light);
+    color: var(--white);
     margin-bottom: 28px;
   }
   .app-footer h3 {
@@ -761,18 +777,19 @@
     font-weight: 500;
     letter-spacing: -0.035em;
     line-height: 1;
+    text-wrap: balance;
   }
   .app-footer h3 i {
     font-family: var(--font-italic);
     font-style: italic;
-    font-weight: 400;
-    color: var(--mint-light);
+    font-weight: 500;
+    color: var(--white);
   }
   .app-footer h4 {
     margin-top: 32px;
     font-size: clamp(20px, 1.5vw, 26px);
     line-height: 1.4;
-    color: rgba(255,255,255,0.82);
+    color: var(--white);
     font-weight: 400;
     letter-spacing: -0.01em;
   }
@@ -803,7 +820,7 @@
     align-items: center;
     gap: 8px;
     font-size: 14px;
-    color: rgba(255,255,255,0.78);
+    color: var(--white);
     border-bottom: 1px solid rgba(255,255,255,0.25);
     padding-bottom: 3px;
     line-height: 1;
@@ -831,12 +848,13 @@
 
   .app-footer__copyright {
     font-size: 12px;
-    color: rgba(255,255,255,0.45);
+    color: var(--white);
     text-align: right;
     letter-spacing: 0;
   }
   .app-footer__copyright a {
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
     padding-bottom: 1px;
   }
 
@@ -884,7 +902,7 @@
         <a href="https://www.wearepop.com/careers" target="_blank" rel="noopener noreferrer">Careers</a>
       </nav>
       <div class="app-header__right">
-        <a href="mailto:chris.dressler@wearepop.com" class="btn btn-small">Let's talk</a>
+        <a href="mailto:Tony.Hoskins@wearepop.com" class="btn btn-small">Let's talk</a>
       </div>
     </div>
   </div>
@@ -1094,7 +1112,7 @@
           <span class="article-section__num">04</span>
           <span class="article-section__label">AEM Guides update</span>
         </div>
-        <h2 class="h2 article-section__title">Structured content for the <i>LLM era.</i></h2>
+        <h2 class="h2 article-section__title"><i>Structured content</i> for the LLM era.</h2>
       </div>
 
       <div class="article-section__body">
@@ -1133,7 +1151,7 @@
           <span class="article-section__num">05</span>
           <span class="article-section__label">MCPs everywhere</span>
         </div>
-        <h2 class="h2 article-section__title">Adobe just made it dramatically faster to build <i>with</i> and <i>on top of</i> its products.</h2>
+        <h2 class="h2 article-section__title">Adobe just made it <i>dramatically faster</i> to build with and on top of its products.</h2>
       </div>
 
       <div class="article-section__body">
@@ -1217,7 +1235,7 @@
     <div class="cta-blade__inner scroll-animate">
       <div>
         <div class="label-small has-bar">Ready to chat?</div>
-        <h2 class="h2" style="margin-top: 20px;">Let's turn Summit 2026 into <i>shipped work.</i></h2>
+        <h2 class="h2" style="margin-top: 20px;">Let's turn Summit 2026 Takeaways into <i>real work.</i></h2>
       </div>
       <div>
         <p class="cta-blade__lede">
@@ -1225,12 +1243,12 @@
         </p>
 
         <div class="cta-contact">
-          <div class="name">Chris Dressler</div>
-          <div class="role">Chief Digital Officer, POP</div>
-          <a href="mailto:chris.dressler@wearepop.com">chris.dressler@wearepop.com</a>
+          <div class="name">Tony Hoskins</div>
+          <div class="role">President, POP</div>
+          <a href="mailto:Tony.Hoskins@wearepop.com">Tony.Hoskins@wearepop.com</a>
         </div>
 
-        <a href="mailto:chris.dressler@wearepop.com?subject=POP%20Signals%20%E2%80%94%20Adobe%20Summit%202026%20Follow-up" class="btn btn-solid">Start a conversation →</a>
+        <a href="mailto:Tony.Hoskins@wearepop.com?subject=POP%20Signals%20%E2%80%94%20Adobe%20Summit%202026%20Follow-up" class="btn btn-solid">Start a conversation →</a>
       </div>
     </div>
   </div>
@@ -1240,6 +1258,8 @@
 
 <!-- === FOOTER (mirrors POP's exactly) === -->
 <footer class="app-footer">
+  <!-- TODO: when Casey's footer bg lands, uncomment the next line and drop file at ./assets/footer-bg.jpg -->
+  <!-- <div class="app-footer__bg" style="background-image: url('./assets/footer-bg.jpg');"></div> -->
   <div class="container">
     <div class="app-footer__eyebrow label-small has-bar">Contact us</div>
     <h3>Got anything that needs <i>POP?</i></h3>
