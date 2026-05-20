@@ -11,6 +11,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
 
 <style>
+  /* POP shared footer italic — Larken Med Italic, self-hosted from POP Brand Kit */
+  @font-face {
+    font-family: 'Larken';
+    src: url('../signals/assets/fonts/larken-mediumitalic.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+  }
+</style>
+
+<style>
   :root {
     /* Refined palette — slightly warmer/deeper than first pass */
     --charcoal:        #1a1d22;
@@ -21,6 +32,7 @@
     --cream:           #f1ebde;
     --bone:            #e8e1d3;
     --bone-soft:       rgba(232,225,211,0.78);
+    --white:           #ffffff;
 
     /* Arc'teryx-feeling accent: deeper, more alpine red than Nike */
     --accent:          #b22020;
@@ -31,6 +43,7 @@
     --line-dark:       rgba(26,29,32,0.18);
 
     --font:    "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
+    --font-italic: "Larken", Georgia, serif;
     --container: 1380px;
     --pad-x: clamp(20px, 4vw, 64px);
     --ease: cubic-bezier(.2, .7, .2, 1);
@@ -661,79 +674,118 @@
     .cta-blade__inner { grid-template-columns: 1fr; }
   }
 
-  /* FOOTER */
+  /* === FOOTER (shared POP footer — matches we-are-pop.com signature) === */
   .app-footer {
-    padding-block: clamp(60px, 8vw, 120px) 32px;
+    background: var(--charcoal);
+    color: var(--white);
+    padding-block: clamp(64px, 8vw, 120px) 32px;
     position: relative;
     overflow: hidden;
   }
-  .app-footer__topo { position: absolute; inset: 0; opacity: 0.08; pointer-events: none; }
-  .footer__eyebrow { color: var(--bone); margin-bottom: 28px; position: relative; }
-  .footer__main h3 {
-    font-size: clamp(40px, 5vw, 76px);
+  .app-footer__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+  }
+  .app-footer > .container { position: relative; z-index: 1; }
+  .app-footer__eyebrow {
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+  .app-footer h3 {
+    font-size: clamp(40px, 5vw, 80px);
+    color: var(--white);
+    max-width: 14ch;
     font-weight: 500;
     letter-spacing: -0.035em;
-    color: var(--cream);
-    max-width: 14ch;
-    position: relative;
     line-height: 1;
+    text-wrap: balance;
   }
-  .footer__main h3 i { font-style: italic; font-weight: 300; color: var(--accent); }
-  .footer__main h4 {
+  .app-footer h3 i {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .app-footer h4 {
     margin-top: 32px;
-    font-size: clamp(18px, 1.4vw, 22px);
+    font-size: clamp(20px, 1.5vw, 26px);
     line-height: 1.4;
-    color: rgba(241,235,222,0.82);
+    color: var(--white);
     font-weight: 400;
     letter-spacing: -0.01em;
-    position: relative;
   }
-  .footer__main h4 a {
-    color: var(--cream);
-    border-bottom: 1px solid rgba(241,235,222,0.4);
+  .app-footer h4 a {
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
     padding-bottom: 2px;
     transition: border-color .3s var(--ease);
   }
-  .footer__main h4 a:hover { border-color: var(--cream); }
+  .app-footer h4 a:hover { border-color: var(--white); }
 
-  .footer__bottom {
+  .app-footer__bottom {
     margin-top: clamp(60px, 8vw, 120px);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     padding-top: 28px;
     border-top: 1px solid var(--line);
-    position: relative;
   }
-  .footer__nav {
+  .app-footer__nav {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     flex-wrap: wrap;
     align-items: center;
   }
-  .footer__nav .arrow-link { font-size: 13px; }
-  .social-links { display: flex; gap: 16px; align-items: center; margin-right: 24px; }
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    padding-bottom: 3px;
+    line-height: 1;
+    transition: color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .arrow-link::after {
+    content: "→";
+    transition: transform .3s var(--ease);
+  }
+  .arrow-link:hover { color: var(--white); border-color: var(--white); }
+  .arrow-link:hover::after { transform: translateX(4px); }
+
+  .social-links { display: flex; gap: 12px; margin-right: 16px; }
   .social-link {
     width: 36px; height: 36px;
     border-radius: 50%;
-    border: 1px solid var(--line);
+    border: 1px solid rgba(255,255,255,0.2);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: var(--white);
     transition: background .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
   }
-  .social-link:hover { background: var(--cream); color: var(--charcoal); border-color: var(--cream); }
-  .footer__copyright {
+  .social-link:hover { background: var(--white); color: var(--charcoal); border-color: var(--white); }
+
+  .app-footer__copyright {
     font-size: 12px;
-    letter-spacing: 0.02em;
-    color: rgba(241,235,222,0.55);
+    color: var(--white);
     text-align: right;
+    letter-spacing: 0;
   }
-  .footer__copyright a { border-bottom: 1px solid rgba(241,235,222,0.25); padding-bottom: 1px; }
+  .app-footer__copyright a {
+    color: var(--white);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 1px;
+  }
 
   @media (max-width: 700px) {
-    .footer__bottom { grid-template-columns: 1fr; }
-    .footer__copyright { text-align: left; }
+    .app-footer__bottom { grid-template-columns: 1fr; }
+    .app-footer__copyright { text-align: left; }
   }
 
   /* SCROLL ANIMATIONS */
@@ -1212,30 +1264,18 @@
 
 </main>
 
-<!-- FOOTER -->
-<footer class="app-footer theme-charcoal">
-  <svg class="app-footer__topo" viewBox="0 0 1600 800" preserveAspectRatio="none" aria-hidden="true">
-    <g stroke="rgba(241,235,222,0.6)" stroke-width="1" fill="none">
-      <path d="M0,700 Q400,620 800,670 T1600,640"/>
-      <path d="M0,650 Q400,570 800,620 T1600,590"/>
-      <path d="M0,600 Q400,520 800,570 T1600,540"/>
-      <path d="M0,550 Q400,470 800,520 T1600,490"/>
-      <path d="M0,500 Q400,420 800,470 T1600,440"/>
-      <path d="M0,450 Q400,370 800,420 T1600,390"/>
-      <path d="M0,400 Q400,320 800,370 T1600,340"/>
-      <path d="M0,350 Q400,270 800,320 T1600,290"/>
-    </g>
-  </svg>
+<!-- === FOOTER (shared POP footer — matches we-are-pop.com) === -->
+<footer class="app-footer">
+  <div class="app-footer__bg" style="background-image: url('../assets/footer_background_pop.png');"></div>
   <div class="container">
-    <div class="footer__eyebrow label-small">Contact us</div>
-    <div class="footer__main">
-      <h3>Got anything that needs <i>POP?</i></h3>
-      <h4>Let’s connect. Send us an email.<br>
-        <a href="mailto:workwithus@wearepop.com">workwithus@wearepop.com</a>
-      </h4>
-    </div>
-    <div class="footer__bottom">
-      <nav class="footer__nav">
+    <div class="app-footer__eyebrow label-small">Contact us</div>
+    <h3>Got anything that needs <i>POP?</i></h3>
+    <h4>Let's connect. Send us an email.<br>
+      <a href="mailto:workwithus@wearepop.com">workwithus@wearepop.com</a>
+    </h4>
+
+    <div class="app-footer__bottom">
+      <nav class="app-footer__nav">
         <div class="social-links">
           <a href="https://www.instagram.com/pop_agency" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
@@ -1250,12 +1290,12 @@
             </svg>
           </a>
         </div>
-        <a href="https://www.wearepop.com/work" target="_blank" rel="noopener noreferrer" class="arrow-link">Explore our work <span class="arr">→</span></a>
-        <a href="https://www.wearepop.com/about" target="_blank" rel="noopener noreferrer" class="arrow-link">Read about us <span class="arr">→</span></a>
-        <a href="https://www.wearepop.com/careers" target="_blank" rel="noopener noreferrer" class="arrow-link">Join our team <span class="arr">→</span></a>
+        <a href="https://www.wearepop.com/work" target="_blank" rel="noopener noreferrer" class="arrow-link">Explore our work</a>
+        <a href="https://www.wearepop.com/about" target="_blank" rel="noopener noreferrer" class="arrow-link">Read about us</a>
+        <a href="https://www.wearepop.com/careers" target="_blank" rel="noopener noreferrer" class="arrow-link">Join our team</a>
       </nav>
-      <div class="footer__copyright">
-        <p>© 2026, POP Inc. All rights reserved. &nbsp;| &nbsp;<a href="https://www.wearepop.com/legal-terms" target="_blank" rel="noopener noreferrer">Privacy Policy</a> &nbsp;| &nbsp;<a href="https://www.wearepop.com/legal-terms#your-california-privacy-rights" target="_blank" rel="noopener noreferrer">Your California Privacy Rights</a></p>
+      <div class="app-footer__copyright">
+        <p>© 2026, POP Inc. All rights reserved. &nbsp;|&nbsp; <a href="https://www.wearepop.com/legal-terms" target="_blank" rel="noopener noreferrer">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.wearepop.com/legal-terms" target="_blank" rel="noopener noreferrer">Your California Privacy Rights</a></p>
       </div>
     </div>
   </div>
