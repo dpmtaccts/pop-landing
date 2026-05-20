@@ -754,15 +754,12 @@
     position: relative;
     overflow: hidden;
   }
-  /* TODO: footer background image from Casey (Slack) — drop file at ./assets/footer-bg.jpg to activate */
   .app-footer__bg {
     position: absolute;
     inset: 0;
     z-index: 0;
     background-size: cover;
     background-position: center;
-    opacity: 0.35;
-    mix-blend-mode: screen;
     pointer-events: none;
   }
   .app-footer > .container { position: relative; z-index: 1; }
@@ -1258,8 +1255,7 @@
 
 <!-- === FOOTER (mirrors POP's exactly) === -->
 <footer class="app-footer">
-  <!-- TODO: when Casey's footer bg lands, uncomment the next line and drop file at ./assets/footer-bg.jpg -->
-  <!-- <div class="app-footer__bg" style="background-image: url('./assets/footer-bg.jpg');"></div> -->
+  <div class="app-footer__bg" style="background-image: url('../assets/footer_background_pop.png');"></div>
   <div class="container">
     <div class="app-footer__eyebrow label-small has-bar">Contact us</div>
     <h3>Got anything that needs <i>POP?</i></h3>
